@@ -261,3 +261,4 @@ export const BOOKING_FAQS: FaqItem[] = [
 ];
 
 export const BOOKING_CTA_LABEL = "Agendar sesión de diagnóstico";
+export const BOOKING_CTA_URL = "https://calendly.com/diisranez/asesoria-norte-studio";

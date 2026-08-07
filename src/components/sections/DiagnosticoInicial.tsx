@@ -14,6 +14,7 @@ export default function DiagnosticoInicial() {
   const blockRef = useRef<HTMLDivElement>(null);
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
 
   useLayoutEffect(() => {
     const wrapperEl = wrapperRef.current;
@@ -39,10 +40,23 @@ export default function DiagnosticoInicial() {
     return () => ctx.revert();
   }, []);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // TODO: wire to a real email/form service — no destination is defined yet.
-    setSubmitted(true);
+    setStatus("sending");
+
+    try {
+      const res = await fetch("/api/diagnostic", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!res.ok) throw new Error("request failed");
+
+      setSubmitted(true);
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -78,11 +92,18 @@ export default function DiagnosticoInicial() {
 
               <button
                 type="submit"
-                className="shrink-0 border-b border-ns-black/40 pb-1 text-left text-micro tracking-[0.02em] opacity-70 transition-opacity duration-200 hover:opacity-100"
+                disabled={status === "sending"}
+                className="shrink-0 border-b border-ns-black/40 pb-1 text-left text-micro tracking-[0.02em] opacity-70 transition-opacity duration-200 hover:opacity-100 disabled:opacity-40"
               >
-                {DIAGNOSTIC_BUTTON_LABEL}
+                {status === "sending" ? "Enviando…" : DIAGNOSTIC_BUTTON_LABEL}
               </button>
             </form>
+          )}
+
+          {status === "error" && (
+            <p className="text-micro opacity-60">
+              No se pudo registrar el correo. Intenta de nuevo en un momento.
+            </p>
           )}
         </div>
       </div>

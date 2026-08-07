@@ -5,7 +5,7 @@ import { useBookingPanel } from "./BookingPanelContext";
 import RotatingPhrase from "./RotatingPhrase";
 import Rhizome from "@/components/Rhizome";
 import Accordion from "@/components/Accordion";
-import { BOOKING_CTA_LABEL, BOOKING_FAQS } from "@/lib/content";
+import { BOOKING_CTA_LABEL, BOOKING_CTA_URL, BOOKING_FAQS } from "@/lib/content";
 
 const VISIBLE_FAQ_COUNT = 3;
 
@@ -58,8 +58,9 @@ export default function BookingPanel() {
           <RotatingPhrase />
 
           <a
-            href="#"
-            onClick={(e) => e.preventDefault()}
+            href={BOOKING_CTA_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block border border-ns-black bg-ns-black px-ns-5 py-ns-3 text-body text-ns-white transition-colors duration-200 hover:bg-ns-white hover:text-ns-black"
           >
             {BOOKING_CTA_LABEL}
