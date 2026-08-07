@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-ns-black py-ns-7 text-ns-white">
       <div className="container-content flex flex-col items-center gap-ns-5 text-center sm:flex-row sm:items-end sm:justify-between sm:text-left">
-        <Logo className="text-ns-white" />
+        <Logo className="invert" />
 
         <div className="flex flex-col items-center gap-ns-2 text-micro tracking-[0.04em] opacity-70 sm:items-end">
           <a
