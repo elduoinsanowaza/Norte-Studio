@@ -262,3 +262,7 @@ export const BOOKING_FAQS: FaqItem[] = [
 
 export const BOOKING_CTA_LABEL = "Agendar sesión de diagnóstico";
 export const BOOKING_CTA_URL = "https://calendly.com/diisranez/asesoria-norte-studio";
+
+export const CONTACT_EMAIL = "norte.studio.dgo@gmail.com";
+export const INSTAGRAM_HANDLE = "@norte_studio_mx";
+export const INSTAGRAM_URL = "https://instagram.com/norte_studio_mx";
