@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+:root {
+  --ns-white: #ffffff;
+  --ns-black: #000000;
+
+  --size-hero: 6rem;
+  --size-question: 4rem;
+  --size-stage-word: 2.75rem;
+  --size-stage-number: 4.75rem;
+  --size-emotional: 2rem;
+  --size-body: 1.25rem;
+  --size-micro: 0.8125rem;
+
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --space-7: 96px;
+  --space-8: 128px;
+  --space-9: 192px;
+
+  --radius: 0px;
+
+  --max-width: 1440px;
+  --content-width: 1280px;
+  --text-width: 720px;
+}
+
+@theme inline {
+  --color-ns-white: var(--ns-white);
+  --color-ns-black: var(--ns-black);
+
+  --font-sans: var(--font-geist-sans), sans-serif;
+  --font-serif: var(--font-cormorant), serif;
+
+  --text-hero: var(--size-hero);
+  --text-hero--line-height: 0.98;
+  --text-question: var(--size-question);
+  --text-question--line-height: 1.05;
+  --text-stage-word: var(--size-stage-word);
+  --text-stage-word--line-height: 1.05;
+  --text-stage-number: var(--size-stage-number);
+  --text-stage-number--line-height: 1;
+  --text-emotional: var(--size-emotional);
+  --text-emotional--line-height: 1.25;
+  --text-body: var(--size-body);
+  --text-body--line-height: 1.6;
+  --text-micro: var(--size-micro);
+  --text-micro--line-height: 1.4;
+
+  --spacing-ns-1: var(--space-1);
+  --spacing-ns-2: var(--space-2);
+  --spacing-ns-3: var(--space-3);
+  --spacing-ns-4: var(--space-4);
+  --spacing-ns-5: var(--space-5);
+  --spacing-ns-6: var(--space-6);
+  --spacing-ns-7: var(--space-7);
+  --spacing-ns-8: var(--space-8);
+  --spacing-ns-9: var(--space-9);
+
+  --radius-ns: var(--radius);
+}
+
+* {
+  border-radius: 0 !important;
+}
+
+html {
+  background: var(--ns-white);
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--ns-white);
+  color: var(--ns-black);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.container-max {
+  max-width: var(--max-width);
+  margin-inline: auto;
+}
+
+.container-content {
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+.container-text {
+  max-width: var(--text-width);
+}
+
+/*
+ * Scan-guiding accent, not de-emphasis. #8A8A8A reads ~3.5:1 against white
+ * (too faint to catch the eye reliably) but ~6:1 against black, so the two
+ * backgrounds get slightly different tones tuned for comparable pop, plus a
+ * weight bump since most body copy here is regular-weight.
+ */
+.highlight {
+  color: #707070;
+  font-weight: 500;
+}
+
+.text-ns-white .highlight {
+  color: #adadad;
+}
