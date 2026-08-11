@@ -10,6 +10,9 @@ import {
 } from "@/lib/content";
 import { gsap } from "@/lib/gsap";
 
+const DESKTOP_QUERY = "(min-width: 768px)";
+const MOBILE_QUERY = "(max-width: 767px)";
+
 const WORD_POSITIONS = [
   "left-[4%] top-[12%] -rotate-6",
   "right-[6%] top-[8%] rotate-3",
@@ -29,23 +32,45 @@ export default function Hero() {
     if (!wrapperEl || !revealEl) return;
 
     const ctx = gsap.context(() => {
-      gsap.set(revealEl, { clipPath: "inset(0 100% 0 0)" });
+      const mm = gsap.matchMedia();
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: wrapperEl,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-        defaults: { ease: "none" },
+      mm.add({ isDesktop: DESKTOP_QUERY, isMobile: MOBILE_QUERY }, (context) => {
+        const { isDesktop } = context.conditions as { isDesktop: boolean };
+
+        gsap.set(revealEl, { clipPath: "inset(0 100% 0 0)" });
+
+        if (!isDesktop) {
+          // The hero is already on screen at load, so this just plays once
+          // instead of scrubbing against scroll position.
+          gsap.to(revealEl, {
+            clipPath: "inset(0 0% 0 0)",
+            duration: 0.7,
+            ease: "power2.out",
+          });
+          return;
+        }
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: wrapperEl,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+          defaults: { ease: "none" },
+        });
+
+        tl.to(revealEl, { clipPath: "inset(0 0% 0 0)", duration: 0.15 }).set(
+          revealEl,
+          {},
+          1
+        );
+
+        return () => {
+          tl.scrollTrigger?.kill();
+          tl.kill();
+        };
       });
-
-      tl.to(revealEl, { clipPath: "inset(0 0% 0 0)", duration: 0.15 }).set(
-        revealEl,
-        {},
-        1
-      );
     }, wrapperEl);
 
     return () => ctx.revert();

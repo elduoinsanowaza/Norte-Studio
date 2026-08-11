@@ -1,7 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { TOOL_ICONS, type ToolName } from "@/components/icons/ToolIcons";
+
+const HOVER_QUERY = "(hover: hover) and (pointer: fine)";
+
+function subscribeHoverCapability(callback: () => void) {
+  const mq = window.matchMedia(HOVER_QUERY);
+  mq.addEventListener("change", callback);
+  return () => mq.removeEventListener("change", callback);
+}
+
+function getHoverCapability() {
+  return window.matchMedia(HOVER_QUERY).matches;
+}
+
+// Assume hover-capable on the server so SSR markup matches the common case;
+// corrected on the client during hydration via useSyncExternalStore.
+function getServerHoverCapability() {
+  return true;
+}
 
 type Node = {
   name: ToolName;
@@ -52,6 +70,16 @@ function isConnected(a: ToolName, b: ToolName) {
 
 export default function Rhizome() {
   const [hovered, setHovered] = useState<ToolName | null>(null);
+  const supportsHover = useSyncExternalStore(
+    subscribeHoverCapability,
+    getHoverCapability,
+    getServerHoverCapability
+  );
+
+  function handleNodeTap(name: ToolName) {
+    if (supportsHover) return;
+    setHovered((prev) => (prev === name ? null : name));
+  }
 
   const nodeOpacity = (name: ToolName) => {
     if (!hovered) return 1;
@@ -105,8 +133,9 @@ export default function Rhizome() {
                 transition: "opacity 200ms ease",
                 cursor: "pointer",
               }}
-              onMouseEnter={() => setHovered(node.name)}
-              onMouseLeave={() => setHovered(null)}
+              onMouseEnter={supportsHover ? () => setHovered(node.name) : undefined}
+              onMouseLeave={supportsHover ? () => setHovered(null) : undefined}
+              onClick={() => handleNodeTap(node.name)}
             >
               <circle
                 cx={node.x}

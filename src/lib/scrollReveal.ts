@@ -31,16 +31,20 @@ export function setupPinnedStaggerReveal({
       gsap.set(targets, { opacity: 0, y: 24 });
 
       if (!isDesktop) {
+        // Single fade + short translateY per target, fired once on entry —
+        // no pin, no scrub. Cheaper and far more predictable than a
+        // scroll-scrubbed tween on mobile browsers (especially iOS Safari,
+        // where the collapsing address bar throws off scrub math).
         const tweens = targets.map((el) =>
           gsap.to(el, {
             opacity: 1,
             y: 0,
-            ease: "none",
+            duration: 0.6,
+            ease: "power2.out",
             scrollTrigger: {
               trigger: el,
               start: "top 85%",
-              end: "top 55%",
-              scrub: true,
+              toggleActions: "play none none none",
             },
           })
         );

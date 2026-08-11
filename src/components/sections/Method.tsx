@@ -33,12 +33,12 @@ export default function Method() {
             gsap.to(stepEl, {
               opacity: 1,
               y: 0,
-              ease: "none",
+              duration: 0.6,
+              ease: "power2.out",
               scrollTrigger: {
                 trigger: stepEl,
                 start: "top 80%",
-                end: "top 45%",
-                scrub: true,
+                toggleActions: "play none none none",
               },
             })
           );

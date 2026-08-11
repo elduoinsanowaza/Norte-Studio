@@ -73,21 +73,27 @@ export default function BottleSection() {
         gsap.set(groupEl, { x: 0, scale: 1 });
 
         if (!isDesktop) {
+          // No continuous zoom on mobile — a single fade + subtle scale-in
+          // for the bottle, fired once on entry, followed by the question
+          // and words. No pin, no scrub.
+          gsap.set(groupEl, { opacity: 0, scale: 0.92 });
+
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: wrapperEl,
               start: "top 75%",
-              end: "top 30%",
-              scrub: true,
+              toggleActions: "play none none none",
             },
-            defaults: { ease: "none" },
+            defaults: { ease: "power2.out" },
           });
 
-          tl.to(questionEl, { opacity: 1, y: 0, duration: 0.3 }).to(
-            revealTargets,
-            { opacity: 1, y: 0, duration: 0.5, stagger: 0.06 },
-            "<0.1"
-          );
+          tl.to(groupEl, { opacity: 1, scale: 1, duration: 0.5 })
+            .to(questionEl, { opacity: 1, y: 0, duration: 0.4 }, "-=0.2")
+            .to(
+              revealTargets,
+              { opacity: 1, y: 0, duration: 0.4, stagger: 0.06 },
+              "-=0.15"
+            );
 
           return () => {
             tl.scrollTrigger?.kill();
