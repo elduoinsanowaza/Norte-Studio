@@ -226,10 +226,6 @@
     transition:transform .7s cubic-bezier(.16,.8,.24,1);
   }
   .ph:hover .ph-real{transform:scale(1.06);}
-  .ph-contain .ph-real{
-    width:auto; height:auto; max-width:100%; max-height:100%; margin:auto;
-  }
-  .ph-contain:hover .ph-real{transform:scale(1.03);}
   .ph::after{
     content:''; position:absolute; inset:0; z-index:2; pointer-events:none;
     background:linear-gradient(to top, rgba(12,13,16,.85) 0%, rgba(12,13,16,.32) 42%, rgba(12,13,16,0) 68%);
@@ -280,14 +276,12 @@
   .aut-item:last-child{border-bottom:1px solid var(--line);}
   .aut-item .aut-label{font-size:15px; color:var(--ink); font-weight:500;}
   .aut-item .aut-val{font-family:var(--serif); font-style:italic; color:var(--red); font-size:15px; white-space:nowrap;}
-  .aut-photo-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  .aut-photo-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
   .aut-photo-row .ph-hero{grid-column:1 / -1; height:280px; width:100%;}
   .aut-photo-row .ph-support{height:220px; width:100%;}
-  .aut-photo-row .ph-support.ph-tall{height:460px;}
   @media(max-width:560px){
     .aut-photo-row{grid-template-columns:1fr;}
     .aut-photo-row .ph-hero, .aut-photo-row .ph-support{height:220px;}
-    .aut-photo-row .ph-support.ph-tall{height:380px;}
   }
 
 
@@ -578,7 +572,7 @@
               <span class="ph-cap">Fachada OfiCo</span>
             </div>
           </div>
-          <div class="ph ph-support ph-tall ph-contain">
+          <div class="ph ph-support">
             <img class="ph-real" src="ofico-demo-assets/autoridad/showroom.webp" alt="Showroom de OfiCo con sillería en exhibición">
             <div class="ph-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 16 L9 10 L13 14 L20 6" stroke="#5B5D63" stroke-width="1.5"/></svg></div>
             <div class="ph-overlay">
