@@ -93,7 +93,7 @@ export default function Hero() {
       </div>
 
       <div className="container-content relative flex flex-col gap-ns-8 py-ns-8">
-        <Logo priority className="self-start" heightRem={2.8} />
+        <Logo priority className="self-start" heightRem={4.5} />
         <p className="max-w-5xl text-4xl leading-[1.05] font-medium tracking-tight sm:text-6xl lg:text-hero">
           <span ref={revealRef} className="block">
             <Highlight text={HERO_STATEMENT} words={HERO_HIGHLIGHT_WORDS} />
