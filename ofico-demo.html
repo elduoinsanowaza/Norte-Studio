@@ -217,36 +217,40 @@
   /* photo placeholder — SUPPORTING role, never full-bleed hero */
   .ph{
     position:relative;
-    background:linear-gradient(135deg,#EEECE7,#E3E0D9);
-    border:1px solid var(--line-strong);
-    display:flex; align-items:flex-end;
+    background:var(--ink);
     overflow:hidden;
   }
-  .ph::before{
-    content:''; position:absolute; inset:0; z-index:0;
-    background-image:repeating-linear-gradient(45deg, rgba(21,22,26,.025) 0 1px, transparent 1px 22px);
-  }
   .ph .ph-real{
-    position:absolute; z-index:1;
-    top:50%; left:50%;
-    transform:translate(-50%,-50%);
-    max-width:100%; max-height:100%;
-    width:auto; height:auto;
-    display:block;
+    position:absolute; inset:0; z-index:1;
+    width:100%; height:100%; object-fit:cover;
+    transition:transform .7s cubic-bezier(.16,.8,.24,1);
+  }
+  .ph:hover .ph-real{transform:scale(1.06);}
+  .ph::after{
+    content:''; position:absolute; inset:0; z-index:2; pointer-events:none;
+    background:linear-gradient(to top, rgba(12,13,16,.85) 0%, rgba(12,13,16,.32) 42%, rgba(12,13,16,0) 68%);
+  }
+  .ph-overlay{
+    position:relative; z-index:3; height:100%;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:20px; gap:3px;
+  }
+  .ph-eyebrow{
+    font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+    color:rgba(255,255,255,.62); font-weight:600;
   }
   .ph .ph-cap{
-    position:relative; z-index:2; margin:14px;
-    font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
-    color:var(--muted); background:rgba(255,255,255,.85);
-    padding:6px 10px; border:1px solid var(--line-strong);
+    font-family:var(--serif); font-style:italic; font-weight:480;
+    font-size:21px; line-height:1.15; color:var(--white);
   }
   .ph .ph-mark{
-    position:absolute; top:14px; right:14px; z-index:2;
-    width:26px; height:26px; border:1px solid var(--line-strong);
+    position:absolute; top:14px; right:14px; z-index:3;
+    width:26px; height:26px; border:1px solid rgba(255,255,255,.4);
     border-radius:50%; display:flex; align-items:center; justify-content:center;
-    background:rgba(255,255,255,.85);
+    background:rgba(255,255,255,.12); backdrop-filter:blur(3px);
   }
-  .ph .ph-mark svg{width:13px; height:13px; opacity:.6;}
+  .ph .ph-mark svg path{stroke:#fff;}
+  .ph .ph-mark svg{width:13px; height:13px; opacity:.85;}
 
   /* ---------- SOLUCIONES ---------- */
   .sol-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
@@ -272,30 +276,13 @@
   .aut-item:last-child{border-bottom:1px solid var(--line);}
   .aut-item .aut-label{font-size:15px; color:var(--ink); font-weight:500;}
   .aut-item .aut-val{font-family:var(--serif); font-style:italic; color:var(--red); font-size:15px; white-space:nowrap;}
-  .aut-photo-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; place-items:center;}
-  .aut-photo-row .ph-hero{grid-column:1 / -1; height:260px; width:100%;}
-  .aut-photo-row .ph-support{height:190px; width:100%;}
+  .aut-photo-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .aut-photo-row .ph-hero{grid-column:1 / -1; height:280px; width:100%;}
+  .aut-photo-row .ph-support{height:220px; width:100%;}
   @media(max-width:560px){
     .aut-photo-row{grid-template-columns:1fr;}
-    .aut-photo-row .ph-hero, .aut-photo-row .ph-support{height:200px;}
+    .aut-photo-row .ph-hero, .aut-photo-row .ph-support{height:220px;}
   }
-  /* hover spotlight: hovered photo grows and shows in full, the others blur/dim */
-  .aut-photo-row .ph{
-    cursor:pointer;
-    transition:transform .45s cubic-bezier(.16,.8,.24,1), box-shadow .45s ease, opacity .4s ease, filter .4s ease;
-  }
-  .aut-photo-row .ph .ph-real{transition:filter .4s ease;}
-  .aut-photo-row .ph.is-hover{
-    transform:scale(1.24);
-    z-index:6;
-    box-shadow:0 26px 60px rgba(21,22,26,.3);
-  }
-  .aut-photo-row.aut-hovering .ph:not(.is-hover){
-    filter:blur(5px);
-    opacity:.5;
-    transform:scale(.96);
-  }
-  @media(max-width:560px){ .aut-photo-row .ph.is-hover{transform:scale(1.1);} }
 
 
   /* ---------- DIFERENCIADOR (light statement, no black bg) ---------- */
@@ -580,17 +567,26 @@
           <div class="ph ph-hero">
             <img class="ph-real" src="ofico-demo-assets/autoridad/fachada.webp" alt="Fachada de las instalaciones de OfiCo">
             <div class="ph-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 16 L9 10 L13 14 L20 6" stroke="#5B5D63" stroke-width="1.5"/></svg></div>
-            <span class="ph-cap">Fachada OfiCo</span>
+            <div class="ph-overlay">
+              <span class="ph-eyebrow">Instalaciones</span>
+              <span class="ph-cap">Fachada OfiCo</span>
+            </div>
           </div>
           <div class="ph ph-support">
             <img class="ph-real" src="ofico-demo-assets/autoridad/showroom.webp" alt="Showroom de OfiCo con sillería en exhibición">
             <div class="ph-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 16 L9 10 L13 14 L20 6" stroke="#5B5D63" stroke-width="1.5"/></svg></div>
-            <span class="ph-cap">Showroom OfiCo</span>
+            <div class="ph-overlay">
+              <span class="ph-eyebrow">Instalaciones</span>
+              <span class="ph-cap">Showroom OfiCo</span>
+            </div>
           </div>
           <div class="ph ph-support">
             <img class="ph-real" src="ofico-demo-assets/autoridad/area-trabajo.webp" alt="Área de trabajo de OfiCo con catálogos de producto">
             <div class="ph-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 16 L9 10 L13 14 L20 6" stroke="#5B5D63" stroke-width="1.5"/></svg></div>
-            <span class="ph-cap">Área de trabajo</span>
+            <div class="ph-overlay">
+              <span class="ph-eyebrow">Instalaciones</span>
+              <span class="ph-cap">Área de trabajo</span>
+            </div>
           </div>
         </div>
       </div>
@@ -853,31 +849,6 @@
     sizeSpacers();
     updateActive();
     setTimeout(() => { sizeSpacers(); updateActive(); }, 60);
-  })();
-
-  // autoridad photos — hover spotlight (grow + show full photo + blur the rest)
-  (function(){
-    const row = document.querySelector('.aut-photo-row');
-    if (!row) return;
-    const photos = Array.from(row.querySelectorAll('.ph'));
-    photos.forEach(p => {
-      p.addEventListener('mouseenter', () => {
-        row.classList.add('aut-hovering');
-        p.classList.add('is-hover');
-      });
-      p.addEventListener('mouseleave', () => {
-        row.classList.remove('aut-hovering');
-        p.classList.remove('is-hover');
-      });
-      p.addEventListener('focus', () => {
-        row.classList.add('aut-hovering');
-        p.classList.add('is-hover');
-      });
-      p.addEventListener('blur', () => {
-        row.classList.remove('aut-hovering');
-        p.classList.remove('is-hover');
-      });
-    });
   })();
 </script>
 
