@@ -4,6 +4,7 @@ import "./globals.css";
 import { BookingPanelProvider } from "@/components/booking/BookingPanelContext";
 import BookingPanel from "@/components/booking/BookingPanel";
 import FixedCtaButton from "@/components/booking/FixedCtaButton";
+import ClientPortalButton from "@/components/ClientPortalButton";
 import LenisProvider from "@/components/LenisProvider";
 
 const geistSans = Geist({
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <LenisProvider>
           <BookingPanelProvider>
             {children}
+            <ClientPortalButton />
             <FixedCtaButton />
             <BookingPanel />
           </BookingPanelProvider>
