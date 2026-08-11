@@ -22,6 +22,14 @@ export default function Footer() {
           >
             {INSTAGRAM_HANDLE}
           </a>
+          <a
+            href="https://norte-studio-clientes.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-opacity duration-200 hover:opacity-100"
+          >
+            Panel de cliente
+          </a>
           <span className="pt-ns-1 opacity-60">Norte Studio</span>
         </div>
       </div>
