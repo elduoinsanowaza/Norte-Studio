@@ -183,8 +183,8 @@ export default function BottleSection() {
               ref={imgRef}
               src="/images/botella.png"
               alt="Botella de Norte Studio"
-              width={973}
-              height={3738}
+              width={573}
+              height={2200}
               priority
               className="block h-[50vh] max-h-[500px] w-auto md:h-[70vh] md:max-h-[720px]"
             />
