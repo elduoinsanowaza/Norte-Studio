@@ -17,10 +17,10 @@ export default function SymptomCard({
       type="button"
       onClick={onOpen}
       aria-label={`Abrir carta: ${item.symptom}`}
-      className="flex min-h-[320px] w-full flex-col items-center justify-center gap-ns-4 border border-ns-black bg-ns-white p-ns-4 text-center text-ns-black transition-opacity duration-200 hover:opacity-80"
+      className="flex aspect-[5/7] w-full flex-col items-center justify-center gap-ns-4 border border-ns-black bg-ns-white p-ns-4 text-center text-ns-black transition-opacity duration-200 hover:opacity-80"
     >
-      <Logo />
-      <span className="text-body font-medium leading-snug">{item.symptom}</span>
+      <span className="text-[0.75rem] font-medium leading-snug">{item.symptom}</span>
+      <Logo heightRem={3.5} />
     </button>
   );
 }
