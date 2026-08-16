@@ -1,6 +1,5 @@
 import Hero from "@/components/sections/Hero";
 import BottleSection from "@/components/sections/BottleSection";
-import Symptoms from "@/components/sections/Symptoms";
 import Method from "@/components/sections/Method";
 import Cases from "@/components/sections/Cases";
 import Tools from "@/components/sections/Tools";
@@ -16,7 +15,6 @@ export default function Home() {
       <main>
         <Hero />
         <BottleSection />
-        <Symptoms />
         <ColorTransition from="white" to="black" />
         <Method />
         <Cases />

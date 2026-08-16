@@ -5,6 +5,9 @@ import { BookingPanelProvider } from "@/components/booking/BookingPanelContext";
 import BookingPanel from "@/components/booking/BookingPanel";
 import FixedCtaButton from "@/components/booking/FixedCtaButton";
 import ClientPortalButton from "@/components/ClientPortalButton";
+import { SymptomsPanelProvider } from "@/components/symptoms/SymptomsPanelContext";
+import SymptomsPanel from "@/components/symptoms/SymptomsPanel";
+import MazoButton from "@/components/symptoms/MazoButton";
 import LenisProvider from "@/components/LenisProvider";
 
 const geistSans = Geist({
@@ -33,10 +36,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <LenisProvider>
           <BookingPanelProvider>
-            {children}
-            <ClientPortalButton />
-            <FixedCtaButton />
-            <BookingPanel />
+            <SymptomsPanelProvider>
+              {children}
+              <div className="fixed top-ns-2 right-ns-2 z-40 flex items-center gap-ns-1 sm:gap-ns-2">
+                <ClientPortalButton />
+                <MazoButton />
+                <FixedCtaButton />
+              </div>
+              <BookingPanel />
+              <SymptomsPanel />
+            </SymptomsPanelProvider>
           </BookingPanelProvider>
         </LenisProvider>
       </body>
