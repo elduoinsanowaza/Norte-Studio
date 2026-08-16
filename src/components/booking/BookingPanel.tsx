@@ -10,7 +10,7 @@ import { BOOKING_CTA_LABEL, BOOKING_CTA_URL, BOOKING_FAQS } from "@/lib/content"
 const VISIBLE_FAQ_COUNT = 3;
 
 export default function BookingPanel() {
-  const { isOpen, close } = useBookingPanel();
+  const { isOpen, close, deckSummary } = useBookingPanel();
   const [showAllFaqs, setShowAllFaqs] = useState(false);
 
   useEffect(() => {
@@ -55,6 +55,19 @@ export default function BookingPanel() {
         </div>
 
         <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-ns-5 py-ns-6 text-center">
+          {deckSummary && deckSummary.length > 0 && (
+            <div className="flex w-full flex-col gap-ns-2 border border-ns-black/20 p-ns-3 text-left">
+              <span className="text-micro tracking-[0.08em] uppercase opacity-60">
+                Basado en tu mazo
+              </span>
+              <ul className="flex flex-col gap-1 text-micro opacity-80">
+                {deckSummary.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           <RotatingPhrase />
 
           <a

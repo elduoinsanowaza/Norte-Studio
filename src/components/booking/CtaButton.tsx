@@ -19,7 +19,7 @@ export default function CtaButton({
   return (
     <button
       type="button"
-      onClick={open}
+      onClick={() => open()}
       className={`inline-block border ${palette} px-ns-4 py-ns-2 text-micro tracking-[0.08em] uppercase text-left transition-colors duration-200 ${className}`}
     >
       {CTA_LABEL}

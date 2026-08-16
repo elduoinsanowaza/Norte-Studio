@@ -4,7 +4,9 @@ import { createContext, useContext, useMemo, useState, type ReactNode } from "re
 
 type BookingPanelContextValue = {
   isOpen: boolean;
-  open: () => void;
+  /** Set when the panel is opened from the Mazo de Síntomas CTA. */
+  deckSummary: string[] | null;
+  open: (deckSummary?: string[]) => void;
   close: () => void;
 };
 
@@ -12,14 +14,22 @@ const BookingPanelContext = createContext<BookingPanelContextValue | null>(null)
 
 export function BookingPanelProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [deckSummary, setDeckSummary] = useState<string[] | null>(null);
 
   const value = useMemo(
     () => ({
       isOpen,
-      open: () => setIsOpen(true),
-      close: () => setIsOpen(false),
+      deckSummary,
+      open: (summary?: string[]) => {
+        setDeckSummary(summary ?? null);
+        setIsOpen(true);
+      },
+      close: () => {
+        setIsOpen(false);
+        setDeckSummary(null);
+      },
     }),
-    [isOpen]
+    [isOpen, deckSummary]
   );
 
   return (
