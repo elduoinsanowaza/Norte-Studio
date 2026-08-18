@@ -3,17 +3,38 @@
 import { useState } from "react";
 import SymptomCard from "@/components/SymptomCard";
 import SymptomDetailPopup from "./SymptomDetailPopup";
-import MazoRegistrationGate from "./MazoRegistrationGate";
+import MazoRegistrationPopup from "./MazoRegistrationPopup";
 import { useBookingPanel } from "@/components/booking/BookingPanelContext";
 import { useSymptomsPanel } from "./SymptomsPanelContext";
 import { SYMPTOMS } from "@/lib/symptoms";
 
 const VISIBLE_SYMPTOMS = SYMPTOMS.filter((s) => s.symptom !== null);
 
+const STORAGE_KEY = "ns-mazo-registrant";
+
+type Registrant = { name: string; email: string };
+
+function loadStoredRegistrant(): Registrant | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (typeof parsed?.name === "string" && typeof parsed?.email === "string") {
+      return parsed;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 export default function SymptomsContent() {
-  const [registrant, setRegistrant] = useState<{ name: string; email: string } | null>(
-    null
-  );
+  // Lazy-init reads localStorage once on mount — remembers this browser
+  // across panel opens/closes and page reloads (not an account system,
+  // just a local "you already registered here" flag).
+  const [registrant, setRegistrant] = useState<Registrant | null>(loadStoredRegistrant);
+  const [pendingCardId, setPendingCardId] = useState<number | null>(null);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const { open: openBooking } = useBookingPanel();
@@ -25,6 +46,28 @@ export default function SymptomsContent() {
     setSelectedIds((prev) =>
       prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
     );
+  }
+
+  function handleCardOpen(id: number) {
+    if (!registrant) {
+      setPendingCardId(id);
+      return;
+    }
+    openDetail(id);
+  }
+
+  function handleRegister(name: string, email: string) {
+    const value = { name, email };
+    setRegistrant(value);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(value));
+    } catch {
+      // Private/incognito browsing can throw — registration still works
+      // for the rest of this session via the in-memory state.
+    }
+    const cardId = pendingCardId;
+    setPendingCardId(null);
+    if (cardId !== null) openDetail(cardId);
   }
 
   async function handleRequestSession() {
@@ -55,14 +98,6 @@ export default function SymptomsContent() {
     openBooking(symptomLines);
   }
 
-  if (!registrant) {
-    return (
-      <MazoRegistrationGate
-        onSubmit={(name, email) => setRegistrant({ name, email })}
-      />
-    );
-  }
-
   return (
     <div className="flex flex-col gap-ns-7">
       <div className="flex max-w-[var(--text-width)] flex-col gap-ns-3">
@@ -85,7 +120,7 @@ export default function SymptomsContent() {
           <SymptomCard
             key={item.id}
             item={item}
-            onOpen={() => openDetail(item.id)}
+            onOpen={() => handleCardOpen(item.id)}
           />
         ))}
       </div>
@@ -130,6 +165,13 @@ export default function SymptomsContent() {
           {submitting ? "Guardando…" : "Solicitar sesión de diagnóstico"}
         </button>
       </div>
+
+      {pendingCardId !== null && (
+        <MazoRegistrationPopup
+          onSubmit={handleRegister}
+          onClose={() => setPendingCardId(null)}
+        />
+      )}
 
       <SymptomDetailPopup selectedIds={selectedIds} onToggleSelect={toggleSelect} />
     </div>
