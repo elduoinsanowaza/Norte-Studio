@@ -102,7 +102,7 @@ export default function SymptomsContent() {
     <div className="flex flex-col gap-ns-7">
       <div className="flex max-w-[var(--text-width)] flex-col gap-ns-3">
         <h2 className="text-micro tracking-[0.08em] uppercase opacity-60">
-          Mazo de síntomas
+          Una carta, una señal
         </h2>
         <p className="text-2xl font-medium sm:text-3xl">
           ¿Qué está pasando en tu negocio?

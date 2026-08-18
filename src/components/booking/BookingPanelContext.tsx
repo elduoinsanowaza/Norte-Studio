@@ -4,7 +4,7 @@ import { createContext, useContext, useMemo, useState, type ReactNode } from "re
 
 type BookingPanelContextValue = {
   isOpen: boolean;
-  /** Set when the panel is opened from the Mazo de Síntomas CTA. */
+  /** Set when the panel is opened from the "Una carta, una señal" CTA. */
   deckSummary: string[] | null;
   open: (deckSummary?: string[]) => void;
   close: () => void;

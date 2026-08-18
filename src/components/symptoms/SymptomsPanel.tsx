@@ -31,7 +31,7 @@ export default function SymptomsPanel() {
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Mazo de síntomas"
+      aria-label="Una carta, una señal"
       className="fixed inset-0 z-50 overflow-y-auto bg-ns-white text-ns-black"
     >
       <div className="container-content flex min-h-full flex-col py-ns-6">
