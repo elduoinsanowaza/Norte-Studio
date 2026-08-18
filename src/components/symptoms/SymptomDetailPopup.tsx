@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { SYMPTOMS } from "@/lib/symptoms";
+import { CARD_BACK_IMAGE, SYMPTOMS } from "@/lib/symptoms";
 import { useSymptomsPanel } from "./SymptomsPanelContext";
 
 export default function SymptomDetailPopup({
@@ -13,6 +13,17 @@ export default function SymptomDetailPopup({
   onToggleSelect: (id: number) => void;
 }) {
   const { detailId, openDetail, closeDetail } = useSymptomsPanel();
+  const [revealed, setRevealed] = useState(false);
+  const [fanHover, setFanHover] = useState<"front" | "back" | null>(null);
+  const [prevDetailId, setPrevDetailId] = useState(detailId);
+
+  // Reset the fan to its "stacked" starting pose whenever a different card
+  // opens, so the entrance animation replays each time (React's documented
+  // pattern for resetting state on a prop change, done during render).
+  if (detailId !== prevDetailId) {
+    setPrevDetailId(detailId);
+    setRevealed(false);
+  }
 
   useEffect(() => {
     if (detailId === null) return;
@@ -22,6 +33,14 @@ export default function SymptomDetailPopup({
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [detailId, closeDetail]);
+
+  useEffect(() => {
+    if (detailId === null) return;
+    // Starts stacked/settled, then fans out — like the pair sliding out of the
+    // deck. A timeout (not rAF) so it still plays if the tab is backgrounded.
+    const id = setTimeout(() => setRevealed(true), 20);
+    return () => clearTimeout(id);
+  }, [detailId]);
 
   if (detailId === null) return null;
 
@@ -60,14 +79,56 @@ export default function SymptomDetailPopup({
         </div>
 
         <div className="flex flex-col gap-ns-5 p-ns-4">
-          <div className="relative mx-auto aspect-[5/7] w-full max-w-xs">
-            <Image
-              src={item.image}
-              alt={item.symptom ?? ""}
-              fill
-              sizes="(min-width: 640px) 320px, 80vw"
-              className="object-contain"
-            />
+          <div
+            className="relative mx-auto aspect-[5/7] w-full max-w-xs"
+            style={{ perspective: "1200px" }}
+          >
+            {/* Card back, fanned behind the front */}
+            <div
+              className="absolute inset-0 transition-transform duration-700 ease-out"
+              style={{
+                transform: !revealed
+                  ? "translate(0%, 0%) rotate(0deg) scale(0.92)"
+                  : fanHover === "back"
+                    ? "translate(16%, -9%) rotate(10deg) scale(1.08)"
+                    : "translate(9%, 6%) rotate(6deg)",
+                zIndex: fanHover === "back" ? 2 : 1,
+              }}
+              onMouseEnter={() => setFanHover("back")}
+              onMouseLeave={() => setFanHover(null)}
+            >
+              <Image
+                src={CARD_BACK_IMAGE}
+                alt=""
+                aria-hidden
+                fill
+                sizes="(min-width: 640px) 320px, 80vw"
+                className="object-contain"
+              />
+            </div>
+
+            {/* Card front — the symptom's own art */}
+            <div
+              className="absolute inset-0 transition-transform duration-700 ease-out"
+              style={{
+                transform: !revealed
+                  ? "translate(0%, 0%) rotate(0deg) scale(0.92)"
+                  : fanHover === "front"
+                    ? "translate(-8%, -11%) rotate(-5deg) scale(1.1)"
+                    : "translate(-5%, 2%) rotate(-3deg)",
+                zIndex: fanHover === "front" ? 2 : 1,
+              }}
+              onMouseEnter={() => setFanHover("front")}
+              onMouseLeave={() => setFanHover(null)}
+            >
+              <Image
+                src={item.image}
+                alt={item.symptom ?? ""}
+                fill
+                sizes="(min-width: 640px) 320px, 80vw"
+                className="object-contain"
+              />
+            </div>
           </div>
 
           <p className="font-serif text-2xl leading-snug italic">
