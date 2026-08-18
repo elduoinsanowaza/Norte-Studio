@@ -38,13 +38,12 @@ export const SYMPTOMS: Symptom[] = [
   },
   {
     id: 3,
-    symptom: "Mis campañas de Meta Ads no convierten.",
+    symptom: "Invierto en publicidad, pero no estoy consiguiendo los clientes que esperaba.",
     feeling: "Esfuerzo sin resultado · espera · frustración",
     imageConcept: "Una pista de aterrizaje perfectamente iluminada, pero sin ningún avión",
     service: "Gestión de campañas de Meta Ads",
     secondaryCauses: ["Diseño y desarrollo de páginas web", "Branding e identidad de marca"],
-    // No final art yet for this one — falls back to the card back until Diego provides it.
-    image: CARD_BACK_IMAGE,
+    image: "/images/cartas/meta-ads.png",
   },
   {
     id: 4,
