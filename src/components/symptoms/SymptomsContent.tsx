@@ -3,6 +3,7 @@
 import { useState } from "react";
 import SymptomCard from "@/components/SymptomCard";
 import SymptomDetailPopup from "./SymptomDetailPopup";
+import MazoRegistrationGate from "./MazoRegistrationGate";
 import { useBookingPanel } from "@/components/booking/BookingPanelContext";
 import { useSymptomsPanel } from "./SymptomsPanelContext";
 import { SYMPTOMS } from "@/lib/symptoms";
@@ -10,7 +11,11 @@ import { SYMPTOMS } from "@/lib/symptoms";
 const VISIBLE_SYMPTOMS = SYMPTOMS.filter((s) => s.symptom !== null);
 
 export default function SymptomsContent() {
+  const [registrant, setRegistrant] = useState<{ name: string; email: string } | null>(
+    null
+  );
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const [submitting, setSubmitting] = useState(false);
   const { open: openBooking } = useBookingPanel();
   const { close: closeSymptoms, openDetail } = useSymptomsPanel();
 
@@ -22,9 +27,40 @@ export default function SymptomsContent() {
     );
   }
 
-  function handleRequestSession() {
+  async function handleRequestSession() {
+    if (!registrant || submitting) return;
+
+    const symptomLines = selectedItems.map((s) => `${s.symptom} → ${s.service}`);
+
+    setSubmitting(true);
+    try {
+      await fetch("/api/mazo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: registrant.name,
+          email: registrant.email,
+          symptoms: symptomLines,
+        }),
+      });
+    } catch (err) {
+      // Don't block booking on this — the person still gets to schedule
+      // even if the mazo failed to save.
+      console.error("Failed to save mazo submission", err);
+    } finally {
+      setSubmitting(false);
+    }
+
     closeSymptoms();
-    openBooking(selectedItems.map((s) => `${s.symptom} → ${s.service}`));
+    openBooking(symptomLines);
+  }
+
+  if (!registrant) {
+    return (
+      <MazoRegistrationGate
+        onSubmit={(name, email) => setRegistrant({ name, email })}
+      />
+    );
   }
 
   return (
@@ -88,10 +124,10 @@ export default function SymptomsContent() {
         <button
           type="button"
           onClick={handleRequestSession}
-          disabled={selectedItems.length === 0}
+          disabled={selectedItems.length === 0 || submitting}
           className="self-start border border-ns-black px-ns-4 py-ns-2 text-micro tracking-[0.08em] uppercase transition-colors duration-200 hover:bg-ns-black hover:text-ns-white disabled:pointer-events-none disabled:opacity-30"
         >
-          Solicitar sesión de diagnóstico
+          {submitting ? "Guardando…" : "Solicitar sesión de diagnóstico"}
         </button>
       </div>
 
