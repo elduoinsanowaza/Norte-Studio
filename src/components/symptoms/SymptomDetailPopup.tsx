@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 import { SYMPTOMS } from "@/lib/symptoms";
 import { useSymptomsPanel } from "./SymptomsPanelContext";
 
@@ -59,12 +60,14 @@ export default function SymptomDetailPopup({
         </div>
 
         <div className="flex flex-col gap-ns-5 p-ns-4">
-          {/* Stand-in for the card-front JPG Diego will provide. */}
-          <div
-            className="flex min-h-[220px] w-full items-center justify-center border border-ns-black/20 px-ns-3 text-center text-micro uppercase tracking-[0.04em] opacity-40"
-            title={item.imageConcept ?? undefined}
-          >
-            {item.image}
+          <div className="relative mx-auto aspect-[5/7] w-full max-w-xs">
+            <Image
+              src={item.image}
+              alt={item.symptom ?? ""}
+              fill
+              sizes="(min-width: 640px) 320px, 80vw"
+              className="object-contain"
+            />
           </div>
 
           <p className="font-serif text-2xl leading-snug italic">
