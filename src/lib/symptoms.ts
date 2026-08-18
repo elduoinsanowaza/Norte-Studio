@@ -10,15 +10,18 @@ export type Symptom = {
   image: string;
 };
 
+/** Shared card back — identical for every symptom card. */
+export const CARD_BACK_IMAGE = "/images/cartas/reverso.png";
+
 export const SYMPTOMS: Symptom[] = [
   {
     id: 1,
-    symptom: "Mi marca no se ve tan consolidada como mi operación.",
+    symptom: "Mi negocio ya cambió, pero mi marca sigue contando una versión vieja de él.",
     feeling: "Contradicción · desbalance · apariencia vs. realidad",
     imageConcept: "Un palacio monumental con una puerta diminuta",
     service: "Branding e identidad de marca",
-    secondaryCauses: ["Diseño gráfico", "Diseño y desarrollo de páginas web"],
-    image: "IMAGE_PLACEHOLDER_01",
+    secondaryCauses: ["Dirección Visual y Comunicación", "Diseño y desarrollo de páginas web"],
+    image: "/images/cartas/branding.png",
   },
   {
     id: 2,
@@ -31,7 +34,7 @@ export const SYMPTOMS: Symptom[] = [
       "Automatización de procesos y CRM",
       "Acompañamiento estratégico continuo",
     ],
-    image: "IMAGE_PLACEHOLDER_02",
+    image: "/images/cartas/consultoria.png",
   },
   {
     id: 3,
@@ -40,7 +43,8 @@ export const SYMPTOMS: Symptom[] = [
     imageConcept: "Una pista de aterrizaje perfectamente iluminada, pero sin ningún avión",
     service: "Gestión de campañas de Meta Ads",
     secondaryCauses: ["Diseño y desarrollo de páginas web", "Branding e identidad de marca"],
-    image: "IMAGE_PLACEHOLDER_03",
+    // No final art yet for this one — falls back to the card back until Diego provides it.
+    image: CARD_BACK_IMAGE,
   },
   {
     id: 4,
@@ -52,7 +56,7 @@ export const SYMPTOMS: Symptom[] = [
       "Branding e identidad de marca",
       "Analítica y medición de resultados (KPIs)",
     ],
-    image: "IMAGE_PLACEHOLDER_04",
+    image: "/images/cartas/paginas-web.png",
   },
   {
     id: 5,
@@ -64,7 +68,7 @@ export const SYMPTOMS: Symptom[] = [
       "Implementación de Inteligencia Artificial",
       "Consultoría estratégica de crecimiento",
     ],
-    image: "IMAGE_PLACEHOLDER_05",
+    image: "/images/cartas/automatizacion.png",
   },
   {
     id: 6,
@@ -76,7 +80,7 @@ export const SYMPTOMS: Symptom[] = [
       "Acompañamiento estratégico continuo",
       "Consultoría estratégica de crecimiento",
     ],
-    image: "IMAGE_PLACEHOLDER_06",
+    image: "/images/cartas/kpis.png",
   },
   {
     id: 7,
@@ -84,17 +88,17 @@ export const SYMPTOMS: Symptom[] = [
     feeling: "Invisibilidad · indiferencia · aislamiento",
     imageConcept: "Una gigantesca valla publicitaria perfectamente iluminada en medio de un desierto",
     service: "Manejo de redes sociales y contenido",
-    secondaryCauses: ["Branding e identidad de marca", "Diseño gráfico"],
-    image: "IMAGE_PLACEHOLDER_07",
+    secondaryCauses: ["Branding e identidad de marca", "Dirección Visual y Comunicación"],
+    image: "/images/cartas/redes.png",
   },
   {
     id: 8,
     symptom: "Mis materiales visuales no se ven profesionales ni consistentes.",
     feeling: "Fragmentación · desorden · falta de identidad",
     imageConcept: "Una galería donde cada cuadro pertenece a una época completamente diferente",
-    service: "Diseño gráfico",
+    service: "Dirección Visual y Comunicación",
     secondaryCauses: ["Branding e identidad de marca", "Manejo de redes sociales y contenido"],
-    image: "IMAGE_PLACEHOLDER_08",
+    image: "/images/cartas/diseno-grafico.png",
   },
   {
     id: 9,
@@ -104,15 +108,15 @@ export const SYMPTOMS: Symptom[] = [
     imageConcept: "Una enorme estructura futurista mientras alguien sostiene un mapa al revés",
     service: "Implementación de Inteligencia Artificial",
     secondaryCauses: ["Automatización de procesos y CRM", "Consultoría estratégica de crecimiento"],
-    image: "IMAGE_PLACEHOLDER_09",
+    image: "/images/cartas/ia.png",
   },
   {
     id: 10,
-    symptom: null,
+    symptom: "Creo que no conozco a mi mercado y no sé por qué me eligen mis clientes.",
     feeling: null,
     imageConcept: null,
-    service: null,
+    service: "Posicionamiento y diferenciación estratégica",
     secondaryCauses: [],
-    image: "IMAGE_PLACEHOLDER_10",
+    image: "/images/cartas/posicionamiento.png",
   },
 ];

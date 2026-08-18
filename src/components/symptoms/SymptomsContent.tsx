@@ -11,6 +11,7 @@ const VISIBLE_SYMPTOMS = SYMPTOMS.filter((s) => s.symptom !== null);
 
 export default function SymptomsContent() {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
   const { open: openBooking } = useBookingPanel();
   const { close: closeSymptoms, openDetail } = useSymptomsPanel();
 
@@ -29,7 +30,12 @@ export default function SymptomsContent() {
 
   return (
     <div className="flex flex-col gap-ns-7">
-      <div className="flex max-w-[var(--text-width)] flex-col gap-ns-3">
+      <div
+        className="flex max-w-[var(--text-width)] flex-col gap-ns-3 transition-[filter,opacity] duration-500 ease-out"
+        style={
+          hoveredId !== null ? { filter: "blur(5px)", opacity: 0.5 } : undefined
+        }
+      >
         <h2 className="text-micro tracking-[0.08em] uppercase opacity-60">
           Mazo de síntomas
         </h2>
@@ -44,17 +50,26 @@ export default function SymptomsContent() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-ns-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-ns-8 sm:grid-cols-2 lg:grid-cols-3">
         {VISIBLE_SYMPTOMS.map((item) => (
           <SymptomCard
             key={item.id}
             item={item}
             onOpen={() => openDetail(item.id)}
+            isHovered={hoveredId === item.id}
+            isDimmed={hoveredId !== null && hoveredId !== item.id}
+            onHoverStart={() => setHoveredId(item.id)}
+            onHoverEnd={() => setHoveredId(null)}
           />
         ))}
       </div>
 
-      <div className="flex flex-col gap-ns-4 border-t border-ns-black/20 pt-ns-6">
+      <div
+        className="flex flex-col gap-ns-4 border-t border-ns-black/20 pt-ns-6 transition-[filter,opacity] duration-500 ease-out"
+        style={
+          hoveredId !== null ? { filter: "blur(5px)", opacity: 0.5 } : undefined
+        }
+      >
         <div className="flex flex-col gap-1">
           <h3 className="text-micro tracking-[0.08em] uppercase opacity-60">
             Tu mazo
