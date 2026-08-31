@@ -37,13 +37,15 @@ export const SYMPTOMS: Symptom[] = [
     image: "/images/cartas/consultoria.png",
   },
   {
+    // Meta Ads pulled from the repertoire for now — kept as a slot so it's
+    // easy to bring back, but null symptom keeps it out of the visible grid.
     id: 3,
-    symptom: "Invierto en publicidad, pero no estoy consiguiendo los clientes que esperaba.",
-    feeling: "Esfuerzo sin resultado · espera · frustración",
-    imageConcept: "Una pista de aterrizaje perfectamente iluminada, pero sin ningún avión",
-    service: "Gestión de campañas de Meta Ads",
-    secondaryCauses: ["Diseño y desarrollo de páginas web", "Branding e identidad de marca"],
-    image: "/images/cartas/meta-ads.png",
+    symptom: null,
+    feeling: null,
+    imageConcept: null,
+    service: null,
+    secondaryCauses: [],
+    image: CARD_BACK_IMAGE,
   },
   {
     id: 4,

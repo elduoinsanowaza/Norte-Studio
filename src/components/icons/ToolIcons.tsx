@@ -39,25 +39,6 @@ export function IconBranding(props: ToolIconProps) {
   );
 }
 
-export function IconMetaAds(props: ToolIconProps) {
-  return (
-    <svg
-      viewBox="0 0 64 64"
-      data-tool="Meta Ads"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2.5}
-      strokeLinecap="round"
-      {...props}
-    >
-      <circle cx={32} cy={32} r={6} />
-      <path d="M32,18 A14,14 0 0 1 46,32" />
-      <path d="M32,10 A22,22 0 0 1 54,32" />
-      <path d="M32,26 A6,6 0 0 1 32,38" />
-    </svg>
-  );
-}
-
 export function IconProduccion(props: ToolIconProps) {
   return (
     <svg
@@ -203,7 +184,6 @@ export function IconConsultoria(props: ToolIconProps) {
 export const TOOL_ICONS = {
   "Dirección Estratégica": IconDireccionEstrategica,
   Branding: IconBranding,
-  "Meta Ads": IconMetaAds,
   Producción: IconProduccion,
   "Sitios Web": IconSitiosWeb,
   IA: IconIA,

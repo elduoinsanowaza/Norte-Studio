@@ -30,17 +30,19 @@ type Node = {
 
 const HUB: Node = { name: "Dirección Estratégica", x: 600, y: 320, hub: true };
 
+// 9 nodes evenly spaced (40° apart) around the hub at radius 260 — Meta Ads
+// pulled from the repertoire for now, so this is a fresh even split rather
+// than the old 10-node layout with a gap left in it.
 const RING: Node[] = [
-  { name: "Meta Ads", x: 860, y: 320 },
-  { name: "Contenido", x: 810, y: 473 },
-  { name: "KPIs", x: 680, y: 567 },
-  { name: "Optimización", x: 520, y: 567 },
-  { name: "Automatización", x: 390, y: 473 },
-  { name: "IA", x: 340, y: 320 },
-  { name: "Sitios Web", x: 390, y: 167 },
-  { name: "Producción", x: 520, y: 73 },
-  { name: "Branding", x: 680, y: 73 },
-  { name: "Consultoría", x: 810, y: 167 },
+  { name: "Contenido", x: 860, y: 320 },
+  { name: "KPIs", x: 799, y: 487 },
+  { name: "Optimización", x: 645, y: 576 },
+  { name: "Automatización", x: 470, y: 545 },
+  { name: "IA", x: 356, y: 409 },
+  { name: "Sitios Web", x: 356, y: 231 },
+  { name: "Producción", x: 470, y: 95 },
+  { name: "Branding", x: 645, y: 64 },
+  { name: "Consultoría", x: 799, y: 153 },
 ];
 
 const NODES: Node[] = [HUB, ...RING];
@@ -53,7 +55,6 @@ const RING_EDGES: [ToolName, ToolName][] = RING.map((node, i) => [
 const SPOKE_EDGES: [ToolName, ToolName][] = RING.map((node) => [HUB.name, node.name]);
 
 const EXTRA_EDGES: [ToolName, ToolName][] = [
-  ["Meta Ads", "Sitios Web"],
   ["Branding", "Automatización"],
   ["Producción", "Optimización"],
 ];
