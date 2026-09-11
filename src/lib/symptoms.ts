@@ -29,7 +29,7 @@ export const SYMPTOMS: Symptom[] = [
     feeling: "Caos · urgencia · desgaste",
     imageConcept:
       "Un enorme cubo de hielo derritiéndose sobre una mesa perfectamente minimalista",
-    service: "Consultoría estratégica de crecimiento",
+    service: "Herramientas internas / sistema de gestión",
     secondaryCauses: [
       "Automatización de procesos y CRM",
       "Acompañamiento estratégico continuo",
@@ -67,7 +67,7 @@ export const SYMPTOMS: Symptom[] = [
     service: "Automatización de procesos y CRM",
     secondaryCauses: [
       "Implementación de Inteligencia Artificial",
-      "Consultoría estratégica de crecimiento",
+      "Herramientas internas / sistema de gestión",
     ],
     image: "/images/cartas/automatizacion.png",
   },
@@ -79,18 +79,21 @@ export const SYMPTOMS: Symptom[] = [
     service: "Analítica y medición de resultados (KPIs)",
     secondaryCauses: [
       "Acompañamiento estratégico continuo",
-      "Consultoría estratégica de crecimiento",
+      "Herramientas internas / sistema de gestión",
     ],
     image: "/images/cartas/kpis.png",
   },
   {
+    // "Manejo de redes sociales y contenido" pulled from the repertoire —
+    // ongoing social-media management doesn't fit the infrastructure-product
+    // model. Kept as a slot so it's easy to bring back, same as Meta Ads.
     id: 7,
-    symptom: "Publico pero nadie interactúa ni recuerda mi marca.",
-    feeling: "Invisibilidad · indiferencia · aislamiento",
-    imageConcept: "Una gigantesca valla publicitaria perfectamente iluminada en medio de un desierto",
-    service: "Manejo de redes sociales y contenido",
-    secondaryCauses: ["Branding e identidad de marca", "Dirección Visual y Comunicación"],
-    image: "/images/cartas/redes.png",
+    symptom: null,
+    feeling: null,
+    imageConcept: null,
+    service: null,
+    secondaryCauses: [],
+    image: CARD_BACK_IMAGE,
   },
   {
     id: 8,
@@ -98,7 +101,7 @@ export const SYMPTOMS: Symptom[] = [
     feeling: "Fragmentación · desorden · falta de identidad",
     imageConcept: "Una galería donde cada cuadro pertenece a una época completamente diferente",
     service: "Dirección Visual y Comunicación",
-    secondaryCauses: ["Branding e identidad de marca", "Manejo de redes sociales y contenido"],
+    secondaryCauses: ["Branding e identidad de marca"],
     image: "/images/cartas/diseno-grafico.png",
   },
   {
@@ -108,7 +111,7 @@ export const SYMPTOMS: Symptom[] = [
     feeling: "Potencial sin dirección · incertidumbre · exceso de posibilidades",
     imageConcept: "Una enorme estructura futurista mientras alguien sostiene un mapa al revés",
     service: "Implementación de Inteligencia Artificial",
-    secondaryCauses: ["Automatización de procesos y CRM", "Consultoría estratégica de crecimiento"],
+    secondaryCauses: ["Automatización de procesos y CRM", "Herramientas internas / sistema de gestión"],
     image: "/images/cartas/ia.png",
   },
   {

@@ -28,21 +28,23 @@ type Node = {
   hub?: boolean;
 };
 
-const HUB: Node = { name: "Dirección Estratégica", x: 600, y: 320, hub: true };
+const HUB: Node = { name: "Infraestructura Digital", x: 600, y: 320, hub: true };
 
-// 9 nodes evenly spaced (40° apart) around the hub at radius 260 — Meta Ads
-// pulled from the repertoire for now, so this is a fresh even split rather
-// than the old 10-node layout with a gap left in it.
+// 9 nodes evenly spaced (40° apart) around the hub at radius 260 — same
+// positions as the old repertoire's ring so unchanged concepts (Branding,
+// Automatización, IA, and the renamed content/web/production nodes) keep
+// their exact spot; only the KPIs/Optimización/Consultoría slots were
+// replaced with the 3 new operational nodes.
 const RING: Node[] = [
-  { name: "Contenido", x: 860, y: 320 },
-  { name: "KPIs", x: 799, y: 487 },
-  { name: "Optimización", x: 645, y: 576 },
+  { name: "Sistemas de Contenido", x: 860, y: 320 },
+  { name: "Sistemas de Inventario", x: 799, y: 487 },
+  { name: "Sistemas Administrativos", x: 645, y: 576 },
   { name: "Automatización", x: 470, y: 545 },
   { name: "IA", x: 356, y: 409 },
-  { name: "Sitios Web", x: 356, y: 231 },
-  { name: "Producción", x: 470, y: 95 },
+  { name: "Páginas Web", x: 356, y: 231 },
+  { name: "Sistemas Audiovisuales", x: 470, y: 95 },
   { name: "Branding", x: 645, y: 64 },
-  { name: "Consultoría", x: 799, y: 153 },
+  { name: "Herramientas Internas", x: 799, y: 153 },
 ];
 
 const NODES: Node[] = [HUB, ...RING];
@@ -56,7 +58,7 @@ const SPOKE_EDGES: [ToolName, ToolName][] = RING.map((node) => [HUB.name, node.n
 
 const EXTRA_EDGES: [ToolName, ToolName][] = [
   ["Branding", "Automatización"],
-  ["Producción", "Optimización"],
+  ["Sistemas Audiovisuales", "Sistemas Administrativos"],
 ];
 
 const EDGES: [ToolName, ToolName][] = [...SPOKE_EDGES, ...RING_EDGES, ...EXTRA_EDGES];

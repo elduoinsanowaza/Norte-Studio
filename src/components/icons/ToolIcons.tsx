@@ -2,11 +2,11 @@ import type { SVGProps } from "react";
 
 export type ToolIconProps = SVGProps<SVGSVGElement>;
 
-export function IconDireccionEstrategica(props: ToolIconProps) {
+export function IconInfraestructuraDigital(props: ToolIconProps) {
   return (
     <svg
       viewBox="0 0 64 64"
-      data-tool="Dirección Estratégica"
+      data-tool="Infraestructura Digital"
       fill="none"
       stroke="currentColor"
       strokeWidth={2.5}
@@ -39,11 +39,11 @@ export function IconBranding(props: ToolIconProps) {
   );
 }
 
-export function IconProduccion(props: ToolIconProps) {
+export function IconSistemasAudiovisuales(props: ToolIconProps) {
   return (
     <svg
       viewBox="0 0 64 64"
-      data-tool="Producción"
+      data-tool="Sistemas Audiovisuales"
       fill="none"
       stroke="currentColor"
       strokeWidth={2.5}
@@ -56,11 +56,11 @@ export function IconProduccion(props: ToolIconProps) {
   );
 }
 
-export function IconSitiosWeb(props: ToolIconProps) {
+export function IconPaginasWeb(props: ToolIconProps) {
   return (
     <svg
       viewBox="0 0 64 64"
-      data-tool="Sitios Web"
+      data-tool="Páginas Web"
       fill="none"
       stroke="currentColor"
       strokeWidth={2.5}
@@ -111,11 +111,11 @@ export function IconAutomatizacion(props: ToolIconProps) {
   );
 }
 
-export function IconContenido(props: ToolIconProps) {
+export function IconSistemasContenido(props: ToolIconProps) {
   return (
     <svg
       viewBox="0 0 64 64"
-      data-tool="Contenido"
+      data-tool="Sistemas de Contenido"
       fill="none"
       stroke="currentColor"
       strokeWidth={2.5}
@@ -129,29 +129,52 @@ export function IconContenido(props: ToolIconProps) {
   );
 }
 
-export function IconKPIs(props: ToolIconProps) {
+/**
+ * Placeholder icon — no final art yet for this service. Simple, consistent
+ * with the hand-drawn set's stroke language, meant to be swapped later.
+ */
+export function IconSistemasAdministrativos(props: ToolIconProps) {
   return (
     <svg
       viewBox="0 0 64 64"
-      data-tool="KPIs"
+      data-tool="Sistemas Administrativos"
       fill="none"
       stroke="currentColor"
       strokeWidth={2.5}
-      strokeLinecap="round"
+      strokeLinejoin="round"
       {...props}
     >
-      <line x1={16} y1={48} x2={16} y2={34} />
-      <line x1={32} y1={48} x2={32} y2={20} />
-      <line x1={48} y1={48} x2={48} y2={10} />
+      <rect x={10} y={10} width={44} height={44} rx={3} />
+      <line x1={10} y1={30} x2={54} y2={30} />
+      <line x1={32} y1={10} x2={32} y2={54} />
     </svg>
   );
 }
 
-export function IconOptimizacion(props: ToolIconProps) {
+/** Placeholder icon — no final art yet for this service. */
+export function IconSistemasInventario(props: ToolIconProps) {
   return (
     <svg
       viewBox="0 0 64 64"
-      data-tool="Optimización"
+      data-tool="Sistemas de Inventario"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2.5}
+      strokeLinejoin="round"
+      {...props}
+    >
+      <rect x={12} y={20} width={28} height={28} />
+      <rect x={24} y={12} width={28} height={28} />
+    </svg>
+  );
+}
+
+/** Placeholder icon — no final art yet for this service. */
+export function IconHerramientasInternas(props: ToolIconProps) {
+  return (
+    <svg
+      viewBox="0 0 64 64"
+      data-tool="Herramientas Internas"
       fill="none"
       stroke="currentColor"
       strokeWidth={2.5}
@@ -159,39 +182,24 @@ export function IconOptimizacion(props: ToolIconProps) {
       strokeLinejoin="round"
       {...props}
     >
-      <line x1={12} y1={48} x2={48} y2={14} />
-      <polyline points="32,14 48,14 48,30" />
-    </svg>
-  );
-}
-
-export function IconConsultoria(props: ToolIconProps) {
-  return (
-    <svg
-      viewBox="0 0 64 64"
-      data-tool="Consultoría"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2.5}
-      strokeLinejoin="round"
-      {...props}
-    >
-      <path d="M10,16 h32 v22 h-20 l-8,8 v-8 h-4 Z" />
+      <path d="M20,24 a12,10 0 0 1 24,0" />
+      <rect x={12} y={24} width={40} height={26} rx={3} />
+      <line x1={12} y1={38} x2={52} y2={38} />
     </svg>
   );
 }
 
 export const TOOL_ICONS = {
-  "Dirección Estratégica": IconDireccionEstrategica,
+  "Infraestructura Digital": IconInfraestructuraDigital,
   Branding: IconBranding,
-  Producción: IconProduccion,
-  "Sitios Web": IconSitiosWeb,
-  IA: IconIA,
+  "Sistemas de Contenido": IconSistemasContenido,
+  "Páginas Web": IconPaginasWeb,
+  "Sistemas Audiovisuales": IconSistemasAudiovisuales,
+  "Sistemas Administrativos": IconSistemasAdministrativos,
+  "Sistemas de Inventario": IconSistemasInventario,
+  "Herramientas Internas": IconHerramientasInternas,
   Automatización: IconAutomatizacion,
-  Contenido: IconContenido,
-  KPIs: IconKPIs,
-  Optimización: IconOptimizacion,
-  Consultoría: IconConsultoria,
+  IA: IconIA,
 } as const;
 
 export type ToolName = keyof typeof TOOL_ICONS;

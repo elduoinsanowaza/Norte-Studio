@@ -14,23 +14,40 @@ export const HERO_BACKGROUND_WORDS = [
   "Más publicaciones",
 ];
 
+export type ServiceGroup = {
+  title: string;
+  items: string[];
+};
+
+export const SERVICE_GROUPS: ServiceGroup[] = [
+  {
+    title: "Infraestructura de posicionamiento",
+    items: [
+      "Branding",
+      "Sistemas de contenido",
+      "Páginas comerciales",
+      "Sistemas audiovisuales",
+    ],
+  },
+  {
+    title: "Infraestructura operativa",
+    items: [
+      "Sistemas administrativos",
+      "Sistemas de inventario",
+      "Herramientas internas",
+      "Automatizaciones",
+      "Integraciones con IA",
+    ],
+  },
+];
+
+export const SERVICES_NOTE =
+  "Cada sistema se diseña a partir de la función que necesita cumplir dentro de la empresa.";
+
 export const BOTTLE_QUESTION = "¿Sabes dónde está el cuello de botella de tu empresa?";
 export const BOTTLE_QUESTION_HIGHLIGHT_WORDS = ["botella"];
 
-export const SYSTEM_WORDS = [
-  "Posicionamiento",
-  "Conversión",
-  "Ventas",
-  "Diferenciación",
-  "Seguimiento",
-  "Precio",
-  "Oferta",
-  "Publicidad",
-  "Contenido",
-  "Procesos",
-  "Retención",
-  "Automatización",
-];
+export const SYSTEM_WORDS = SERVICE_GROUPS.flatMap((group) => group.items);
 
 export type MethodStep = {
   number: string;
@@ -49,9 +66,9 @@ export const METHOD_STEPS: MethodStep[] = [
   },
   {
     number: "02",
-    title: "Identificar",
-    description: "Encontramos la restricción real, no el síntoma más visible.",
-    highlightWords: ["visible"],
+    title: "Desarrollar",
+    description: "Construimos el sistema puntual que tu negocio necesita, no una plantilla genérica.",
+    highlightWords: ["sistema", "genérica"],
   },
   {
     number: "03",
@@ -119,14 +136,14 @@ export const OBJECTIONS: Objection[] = [
   {
     question: "¿Por qué no contratar a alguien de cada área por separado?",
     answer:
-      "Un especialista en dirección de marketing, uno en Meta Ads, uno en contenido y uno en desarrollo web cuestan entre $9,000 y $15,000 mensuales cada uno — más de $45,000 al mes en total. Los honorarios de Norte Studio equivalen a menos de una cuarta parte de esa cifra, integrando todo en una sola dirección externa.",
-    highlightWords: ["$45,000", "cuarta parte", "externa"],
+      "Un especialista en branding, uno en desarrollo de sistemas web, uno en automatización de procesos y uno en gestión de contenido cuestan entre $9,000 y $15,000 mensuales cada uno — más de $45,000 al mes en total. Los honorarios de Norte Studio equivalen a menos de una cuarta parte de esa cifra, integrando todo en una sola infraestructura digital.",
+    highlightWords: ["$45,000", "cuarta parte", "infraestructura digital"],
   },
   {
-    question: "¿Y si el problema no es marketing?",
+    question: "¿Y si no sé qué sistema necesito?",
     answer:
-      "Identificamos el verdadero problema. No somos una agencia. Somos un socio externo de crecimiento.",
-    highlightWords: ["verdadero", "agencia", "crecimiento"],
+      "No hace falta que lo sepas antes de hablar con nosotros. En la sesión de diagnóstico identificamos juntos qué función de tu negocio necesita resolverse y qué sistema tiene sentido construir.",
+    highlightWords: ["sesión de diagnóstico", "juntos", "sistema"],
   },
 ];
 
@@ -140,7 +157,7 @@ export const ALL_OBJECTIONS: Objection[] = [
   {
     question: "¿Qué diferencia hay entre Norte Studio y una agencia de marketing?",
     answer:
-      "Una agencia normalmente optimiza un área específica del negocio: publicidad, contenido, diseño o redes sociales.\n\nNorte Studio comienza antes.\n\nAnalizamos el sistema completo para identificar qué está limitando realmente el crecimiento de la empresa y, a partir de ese diagnóstico, definimos la intervención con mayor impacto. En algunos casos será marketing. En otros, no.",
+      "Una agencia normalmente optimiza un área específica del negocio: publicidad, contenido, diseño o redes sociales.\n\nNorte Studio comienza antes.\n\nIdentificamos qué sistema o herramienta resuelve realmente la necesidad de tu negocio y, a partir de ese diagnóstico, construimos esa infraestructura. En algunos casos será un sistema de contenido. En otros, uno operativo.",
     highlightWords: [],
   },
   {
@@ -158,7 +175,7 @@ export const ALL_OBJECTIONS: Objection[] = [
   {
     question: "¿Pueden trabajar con el equipo que ya tengo?",
     answer:
-      "Sí.\n\nNuestro objetivo no es sustituir equipos existentes, sino integrarnos a ellos cuando sea necesario. Podemos colaborar con personal interno, agencias o proveedores externos, aportando dirección estratégica y coordinando las intervenciones para que todo el sistema avance en la misma dirección.",
+      "Sí.\n\nNuestro objetivo no es sustituir equipos existentes, sino integrarnos a ellos cuando sea necesario. Podemos colaborar con personal interno, agencias o proveedores externos, aportando la infraestructura digital necesaria y coordinando su implementación para que todo el sistema avance en la misma dirección.",
     highlightWords: [],
   },
   {
@@ -181,9 +198,9 @@ export const ALL_OBJECTIONS: Objection[] = [
   },
   {
     question:
-      "¿Cómo sé que mi empresa realmente necesita este tipo de dirección estratégica?",
+      "¿Cómo sé que mi empresa realmente necesita este tipo de infraestructura digital?",
     answer:
-      "Si tu empresa está creciendo más lento de lo que debería, las ventas no reflejan el esfuerzo invertido o sientes que constantemente cambias de herramientas sin resolver el problema de fondo, probablemente el reto no sea ejecutar más, sino identificar correctamente dónde intervenir.",
+      "Si tu empresa está creciendo más lento de lo que debería, las ventas no reflejan el esfuerzo invertido o sientes que constantemente cambias de herramientas sin resolver el problema de fondo, probablemente el reto no sea ejecutar más, sino identificar correctamente qué sistema construir.",
     highlightWords: [],
   },
 ];
@@ -198,7 +215,7 @@ export const CLOSING_HIGHLIGHT_WORDS = ["comprender", "valor", "funcionar"];
 export const DIAGNOSTIC_TITLE = "¿Aún no estás listo para agendar una reunión?";
 
 export const DIAGNOSTIC_TEXT =
-  "No todas las decisiones deben tomarse hoy. Si prefieres comprender mejor cómo analizamos una empresa antes de hablar con nosotros, puedes recibir nuestro diagnóstico inicial y explorarlo a tu propio ritmo.";
+  "No todas las decisiones deben tomarse hoy. Si prefieres comprender mejor cómo identificamos qué sistema necesitas y cómo se estructura, antes de hablar con nosotros, puedes recibir nuestro diagnóstico inicial y explorarlo a tu propio ritmo.";
 
 export const DIAGNOSTIC_BUTTON_LABEL = "Recibir diagnóstico inicial";
 

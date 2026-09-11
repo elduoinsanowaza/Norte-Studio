@@ -22,9 +22,9 @@ const cormorantGaramond = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Norte Studio — Dirección externa de crecimiento",
+  title: "Norte Studio — Infraestructura digital para negocios",
   description:
-    "Las empresas no dejan de crecer por falta de esfuerzo. Dejan de crecer porque resuelven los problemas equivocados. Norte Studio identifica el verdadero cuello de botella de tu empresa.",
+    "Las empresas no dejan de crecer por falta de esfuerzo. Dejan de crecer porque resuelven los problemas equivocados. Norte Studio construye la infraestructura digital que tu empresa necesita.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
