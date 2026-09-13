@@ -8,6 +8,7 @@ import MazoRegistrationPopup from "./MazoRegistrationPopup";
 import { useBookingPanel } from "@/components/booking/BookingPanelContext";
 import { useSymptomsPanel } from "./SymptomsPanelContext";
 import { SYMPTOMS } from "@/lib/symptoms";
+import { GLASS_BUTTON_LIGHT } from "@/lib/glassButton";
 
 const VISIBLE_SYMPTOMS = SYMPTOMS.filter((s) => s.symptom !== null);
 const VALID_IDS = new Set(VISIBLE_SYMPTOMS.map((s) => s.id));
@@ -196,7 +197,7 @@ export default function SymptomsContent() {
           type="button"
           onClick={handleRequestSession}
           disabled={selectedItems.length === 0 || submitting}
-          className="self-start border border-ns-black px-ns-4 py-ns-2 text-micro tracking-[0.08em] uppercase transition-colors duration-200 hover:bg-ns-black hover:text-ns-white disabled:pointer-events-none disabled:opacity-30"
+          className={`self-start radius-2xl px-ns-4 py-ns-2 text-micro tracking-[0.08em] uppercase disabled:pointer-events-none disabled:opacity-30 ${GLASS_BUTTON_LIGHT}`}
         >
           {submitting ? "Guardando…" : "Solicitar sesión de diagnóstico"}
         </button>

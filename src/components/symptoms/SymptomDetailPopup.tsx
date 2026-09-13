@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { CARD_BACK_IMAGE, SYMPTOMS } from "@/lib/symptoms";
 import { useSymptomsPanel } from "./SymptomsPanelContext";
+import { GLASS_BUTTON_LIGHT, GLASS_BUTTON_LIGHT_SM, GLASS_CARD_LIGHT } from "@/lib/glassButton";
+import GlassBlobs from "@/components/GlassBlobs";
 
 export default function SymptomDetailPopup({
   selectedIds,
@@ -57,14 +59,15 @@ export default function SymptomDetailPopup({
         onClick={closeDetail}
         aria-hidden
       />
+      <GlassBlobs />
 
       <div
         role="dialog"
         aria-modal="true"
         aria-label={`Síntoma ${number}`}
-        className="relative flex h-[92vh] w-full max-w-3xl flex-col overflow-y-auto border border-ns-black bg-ns-white text-ns-black"
+        className={`relative flex h-[92vh] w-full max-w-3xl flex-col overflow-y-auto radius-3xl ${GLASS_CARD_LIGHT}`}
       >
-        <div className="flex items-center justify-between border-b border-ns-black/20 px-ns-4 py-ns-3">
+        <div className="flex items-center justify-between border-b border-ns-black/10 px-ns-4 py-ns-3">
           <span className="text-micro tracking-[0.08em] uppercase opacity-60">
             #{number} · Síntoma
           </span>
@@ -72,7 +75,7 @@ export default function SymptomDetailPopup({
             type="button"
             onClick={closeDetail}
             aria-label="Cerrar"
-            className="border border-ns-black px-ns-2 py-ns-1 text-micro uppercase tracking-[0.08em] hover:bg-ns-black hover:text-ns-white"
+            className={`radius-full px-ns-2 py-ns-1 text-micro uppercase tracking-[0.08em] ${GLASS_BUTTON_LIGHT_SM}`}
           >
             Cerrar ✕
           </button>
@@ -151,7 +154,7 @@ export default function SymptomDetailPopup({
                 {item.secondaryCauses.map((cause) => {
                   const match = SYMPTOMS.find((s) => s.service === cause);
                   const tile = (
-                    <div className="border border-ns-black/30 px-ns-3 py-ns-3 text-micro">
+                    <div className="radius-2xl border border-ns-black/15 bg-white/30 px-ns-3 py-ns-3 text-micro">
                       {cause}
                     </div>
                   );
@@ -180,10 +183,10 @@ export default function SymptomDetailPopup({
           <button
             type="button"
             onClick={() => onToggleSelect(item.id)}
-            className={`self-start border px-ns-4 py-ns-2 text-micro tracking-[0.08em] uppercase transition-colors duration-200 ${
+            className={`self-start radius-2xl px-ns-4 py-ns-2 text-micro tracking-[0.08em] uppercase transition-colors duration-200 ${
               selected
-                ? "border-ns-black bg-ns-black text-ns-white"
-                : "border-ns-black text-ns-black hover:bg-ns-black hover:text-ns-white"
+                ? "border border-ns-black bg-ns-black text-ns-white"
+                : GLASS_BUTTON_LIGHT
             }`}
           >
             {selected ? "✓ En tu mazo" : "+ Agregar a mi mazo"}

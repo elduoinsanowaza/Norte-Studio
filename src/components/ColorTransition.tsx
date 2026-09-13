@@ -1,8 +1,3 @@
-"use client";
-
-import { useLayoutEffect, useRef } from "react";
-import { gsap } from "@/lib/gsap";
-
 type NsColor = "white" | "black";
 
 const COLOR_VALUES: Record<NsColor, string> = {
@@ -10,6 +5,11 @@ const COLOR_VALUES: Record<NsColor, string> = {
   black: "#000000",
 };
 
+/**
+ * A plain CSS gradient strip between two flat-color sections — inherently
+ * gradual (no scroll-scrub needed), so it can't ever read as an abrupt cut
+ * the way the old JS-driven color interpolation sometimes did.
+ */
 export default function ColorTransition({
   from,
   to,
@@ -19,35 +19,14 @@ export default function ColorTransition({
   to: NsColor;
   heightVh?: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const ctx = gsap.context(() => {
-      gsap.set(el, { backgroundColor: COLOR_VALUES[from] });
-      gsap.to(el, {
-        backgroundColor: COLOR_VALUES[to],
-        ease: "none",
-        scrollTrigger: {
-          trigger: el,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    }, el);
-
-    return () => ctx.revert();
-  }, [from, to]);
-
   return (
     <div
-      ref={ref}
       aria-hidden
       className="w-full"
-      style={{ height: `${heightVh}vh` }}
+      style={{
+        height: `${heightVh}vh`,
+        background: `linear-gradient(to bottom, ${COLOR_VALUES[from]}, ${COLOR_VALUES[to]})`,
+      }}
     />
   );
 }

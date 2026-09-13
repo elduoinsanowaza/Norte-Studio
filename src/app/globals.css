@@ -68,6 +68,23 @@
   border-radius: 0 !important;
 }
 
+/*
+ * Escape hatch for the rare deliberately-rounded surface (glassmorphism
+ * buttons/blobs/cards). The blanket reset above is !important, so a plain
+ * Tailwind `rounded-*` utility (not !important) can never beat it — only a
+ * more specific selector carrying its own !important can. Use these classes
+ * instead of `rounded-*` wherever a genuinely rounded corner is wanted.
+ */
+.radius-full {
+  border-radius: 9999px !important;
+}
+.radius-2xl {
+  border-radius: 1rem !important;
+}
+.radius-3xl {
+  border-radius: 1.5rem !important;
+}
+
 html {
   background: var(--ns-white);
   scroll-behavior: auto;

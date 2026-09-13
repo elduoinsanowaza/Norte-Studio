@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import CtaButton from "@/components/booking/CtaButton";
 import Highlight from "@/components/Highlight";
+import GlassBlobs from "@/components/GlassBlobs";
 import {
   BOTTLE_QUESTION,
   BOTTLE_QUESTION_HIGHLIGHT_WORDS,
@@ -170,13 +171,14 @@ export default function BottleSection() {
   return (
     <section
       ref={wrapperRef}
-      className="relative bg-ns-white text-ns-black md:h-[var(--bottle-total-vh)]"
+      className="relative overflow-hidden bg-ns-white text-ns-black md:h-[var(--bottle-total-vh)]"
       style={{ "--bottle-total-vh": `${TOTAL_VH}vh` } as React.CSSProperties}
     >
       <div
         ref={pinRef}
         className="relative flex flex-col items-center gap-ns-6 px-ns-4 py-ns-9 text-center md:h-screen md:w-full md:flex-row md:items-center md:justify-center md:overflow-hidden md:px-0 md:py-0 md:text-left"
       >
+        <GlassBlobs />
         <div className="flex justify-center md:absolute md:inset-0 md:items-center md:justify-center">
           <div ref={bottleGroupRef} className="will-change-transform">
             <Image

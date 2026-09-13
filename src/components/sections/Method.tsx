@@ -4,6 +4,8 @@ import { useLayoutEffect, useRef } from "react";
 import Highlight from "@/components/Highlight";
 import { METHOD_STEPS } from "@/lib/content";
 import { gsap } from "@/lib/gsap";
+import { GLASS_CARD_DARK } from "@/lib/glassButton";
+import GlassBlobs from "@/components/GlassBlobs";
 
 const DESKTOP_QUERY = "(min-width: 768px)";
 const MOBILE_QUERY = "(max-width: 767px)";
@@ -93,12 +95,13 @@ export default function Method() {
   return (
     <section
       ref={wrapperRef}
-      className="relative bg-ns-black text-ns-white md:h-[500vh]"
+      className="relative overflow-hidden bg-ns-black text-ns-white md:h-[500vh]"
     >
       <div
         ref={pinRef}
         className="relative flex flex-col gap-ns-7 px-ns-4 py-ns-8 md:h-screen md:justify-center md:overflow-hidden md:px-0 md:py-0"
       >
+        <GlassBlobs dark />
         <h2 className="container-content text-2xl font-medium tracking-[0.08em] uppercase opacity-60 md:absolute md:top-ns-6 md:left-1/2 md:-translate-x-1/2">
           Método
         </h2>
@@ -110,9 +113,11 @@ export default function Method() {
               ref={(el) => {
                 stepRefs.current[i] = el;
               }}
-              className="flex flex-col gap-ns-2 border-t border-ns-white/20 pt-ns-5 md:absolute md:inset-0 md:flex md:items-center md:justify-center md:border-none md:pt-0"
+              className="flex flex-col gap-ns-2 md:absolute md:inset-0 md:flex md:items-center md:justify-center"
             >
-              <div className="flex flex-col items-start gap-ns-2 md:max-w-3xl md:flex-row md:items-baseline md:gap-ns-6">
+              <div
+                className={`flex flex-col items-start gap-ns-2 radius-2xl p-ns-6 md:max-w-3xl md:flex-row md:items-baseline md:gap-ns-6 ${GLASS_CARD_DARK}`}
+              >
                 <span className="text-4xl font-medium tabular-nums opacity-40 md:text-stage-number">
                   {step.number}
                 </span>

@@ -6,6 +6,8 @@ import RotatingPhrase from "./RotatingPhrase";
 import Rhizome from "@/components/Rhizome";
 import Accordion from "@/components/Accordion";
 import { BOOKING_CTA_LABEL, BOOKING_CTA_URL, BOOKING_FAQS } from "@/lib/content";
+import { GLASS_BUTTON_LIGHT, GLASS_BUTTON_LIGHT_SM, GLASS_CARD_LIGHT } from "@/lib/glassButton";
+import GlassBlobs from "@/components/GlassBlobs";
 
 const VISIBLE_FAQ_COUNT = 3;
 
@@ -42,13 +44,14 @@ export default function BookingPanel() {
       aria-label="Agenda tu cita"
       className="fixed inset-0 z-50 overflow-y-auto bg-ns-white text-ns-black"
     >
+      <GlassBlobs />
       <div className="container-content flex min-h-full flex-col py-ns-6">
         <div className="flex justify-end">
           <button
             type="button"
             onClick={close}
             aria-label="Cerrar"
-            className="border border-ns-black px-ns-2 py-ns-1 text-micro uppercase tracking-[0.08em] hover:bg-ns-black hover:text-ns-white"
+            className={`radius-full px-ns-2 py-ns-1 text-micro uppercase tracking-[0.08em] ${GLASS_BUTTON_LIGHT_SM}`}
           >
             Cerrar ✕
           </button>
@@ -56,7 +59,7 @@ export default function BookingPanel() {
 
         <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-ns-5 py-ns-6 text-center">
           {deckSummary && deckSummary.length > 0 && (
-            <div className="flex w-full flex-col gap-ns-2 border border-ns-black/20 p-ns-3 text-left">
+            <div className={`flex w-full flex-col gap-ns-2 radius-2xl p-ns-4 text-left ${GLASS_CARD_LIGHT}`}>
               <span className="text-micro tracking-[0.08em] uppercase opacity-60">
                 Basado en tu mazo
               </span>
@@ -74,7 +77,7 @@ export default function BookingPanel() {
             href={BOOKING_CTA_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block border border-ns-black bg-ns-black px-ns-5 py-ns-3 text-body text-ns-white transition-colors duration-200 hover:bg-ns-white hover:text-ns-black"
+            className={`inline-block radius-2xl px-ns-5 py-ns-3 text-body ${GLASS_BUTTON_LIGHT}`}
           >
             {BOOKING_CTA_LABEL}
           </a>
@@ -92,7 +95,7 @@ export default function BookingPanel() {
               <button
                 type="button"
                 onClick={() => setShowAllFaqs(true)}
-                className="inline-block border border-ns-black px-ns-4 py-ns-2 text-micro tracking-[0.08em] uppercase transition-colors duration-200 hover:bg-ns-black hover:text-ns-white"
+                className={`inline-block radius-2xl px-ns-4 py-ns-2 text-micro tracking-[0.08em] uppercase ${GLASS_BUTTON_LIGHT}`}
               >
                 Ver más preguntas
               </button>

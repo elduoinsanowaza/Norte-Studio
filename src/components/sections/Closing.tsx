@@ -5,6 +5,7 @@ import CtaButton from "@/components/booking/CtaButton";
 import Highlight from "@/components/Highlight";
 import { CLOSING_HIGHLIGHT_WORDS, CLOSING_LINES } from "@/lib/content";
 import { setupPinnedStaggerReveal } from "@/lib/scrollReveal";
+import GlassBlobs from "@/components/GlassBlobs";
 
 export default function Closing() {
   const wrapperRef = useRef<HTMLElement>(null);
@@ -32,12 +33,13 @@ export default function Closing() {
   return (
     <section
       ref={wrapperRef}
-      className="relative bg-ns-black text-ns-white md:h-[200vh]"
+      className="relative overflow-hidden bg-ns-black text-ns-white md:h-[200vh]"
     >
       <div
         ref={pinRef}
-        className="container-content flex flex-col items-start gap-ns-6 py-ns-9 md:h-screen md:justify-center md:py-0"
+        className="container-content relative flex flex-col items-start gap-ns-6 py-ns-9 md:h-screen md:justify-center md:py-0"
       >
+        <GlassBlobs dark />
         <div className="flex max-w-[var(--text-width)] flex-col gap-ns-5 font-serif text-3xl leading-[1.3] font-medium sm:text-4xl lg:text-emotional">
           {CLOSING_LINES.map((line, i) => (
             <p

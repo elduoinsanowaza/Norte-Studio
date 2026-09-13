@@ -3,6 +3,8 @@
 import { useEffect } from "react";
 import { useSymptomsPanel } from "./SymptomsPanelContext";
 import SymptomsContent from "./SymptomsContent";
+import GlassBlobs from "@/components/GlassBlobs";
+import { GLASS_BUTTON_LIGHT_SM } from "@/lib/glassButton";
 
 export default function SymptomsPanel() {
   const { isOpen, close, detailId } = useSymptomsPanel();
@@ -34,13 +36,14 @@ export default function SymptomsPanel() {
       aria-label="Una carta, una señal"
       className="fixed inset-0 z-50 overflow-y-auto bg-ns-white text-ns-black"
     >
+      <GlassBlobs />
       <div className="container-content flex min-h-full flex-col py-ns-6">
         <div className="flex justify-end">
           <button
             type="button"
             onClick={close}
             aria-label="Cerrar"
-            className="border border-ns-black px-ns-2 py-ns-1 text-micro uppercase tracking-[0.08em] hover:bg-ns-black hover:text-ns-white"
+            className={`radius-full px-ns-2 py-ns-1 text-micro uppercase tracking-[0.08em] ${GLASS_BUTTON_LIGHT_SM}`}
           >
             Cerrar ✕
           </button>

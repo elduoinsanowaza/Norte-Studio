@@ -4,6 +4,8 @@ import { useLayoutEffect, useRef } from "react";
 import CtaButton from "@/components/booking/CtaButton";
 import { CASE_STUDIES } from "@/lib/content";
 import { setupPinnedStaggerReveal } from "@/lib/scrollReveal";
+import GlassBlobs from "@/components/GlassBlobs";
+import { GLASS_CARD_DARK } from "@/lib/glassButton";
 
 export default function Cases() {
   const wrapperRef = useRef<HTMLElement>(null);
@@ -31,12 +33,13 @@ export default function Cases() {
   return (
     <section
       ref={wrapperRef}
-      className="relative bg-ns-black text-ns-white md:h-[220vh]"
+      className="relative overflow-hidden bg-ns-black text-ns-white md:h-[220vh]"
     >
       <div
         ref={pinRef}
-        className="container-content flex flex-col gap-ns-7 py-ns-8 md:h-screen md:justify-center md:py-0"
+        className="container-content relative flex flex-col gap-ns-7 py-ns-8 md:h-screen md:justify-center md:py-0"
       >
+        <GlassBlobs dark />
         <h2 className="text-2xl font-medium tracking-[0.08em] uppercase opacity-60">
           Casos reales
         </h2>
@@ -49,7 +52,7 @@ export default function Cases() {
                 cardRefs.current[i] = el;
               }}
             >
-              <article className="flex flex-col gap-ns-3 border-t border-ns-white/20 pt-ns-4">
+              <article className={`flex flex-col gap-ns-3 radius-2xl p-ns-5 ${GLASS_CARD_DARK}`}>
                 <span className="text-micro tracking-[0.08em] opacity-50">
                   {item.number}
                 </span>

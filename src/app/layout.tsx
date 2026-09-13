@@ -3,11 +3,9 @@ import { Geist, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { BookingPanelProvider } from "@/components/booking/BookingPanelContext";
 import BookingPanel from "@/components/booking/BookingPanel";
-import FixedCtaButton from "@/components/booking/FixedCtaButton";
-import ClientPortalButton from "@/components/ClientPortalButton";
 import { SymptomsPanelProvider } from "@/components/symptoms/SymptomsPanelContext";
 import SymptomsPanel from "@/components/symptoms/SymptomsPanel";
-import MazoButton from "@/components/symptoms/MazoButton";
+import FixedNav from "@/components/FixedNav";
 import LenisProvider from "@/components/LenisProvider";
 
 const geistSans = Geist({
@@ -22,6 +20,7 @@ const cormorantGaramond = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://norte-studio.vercel.app"),
   title: "Norte Studio — Infraestructura digital para negocios",
   description:
     "Las empresas no dejan de crecer por falta de esfuerzo. Dejan de crecer porque resuelven los problemas equivocados. Norte Studio construye la infraestructura digital que tu empresa necesita.",
@@ -38,11 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <BookingPanelProvider>
             <SymptomsPanelProvider>
               {children}
-              <div className="fixed top-ns-2 right-ns-2 z-40 flex items-center gap-ns-1 sm:gap-ns-2">
-                <ClientPortalButton />
-                <MazoButton />
-                <FixedCtaButton />
-              </div>
+              <FixedNav />
               <BookingPanel />
               <SymptomsPanel />
             </SymptomsPanelProvider>

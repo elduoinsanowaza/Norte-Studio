@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Logo from "@/components/Logo";
 import { CONTACT_EMAIL, INSTAGRAM_HANDLE, INSTAGRAM_URL } from "@/lib/content";
 
@@ -8,6 +9,12 @@ export default function Footer() {
         <Logo className="invert" />
 
         <div className="flex flex-col items-center gap-ns-2 text-micro tracking-[0.04em] opacity-70 sm:items-end">
+          <Link
+            href="/norte-news"
+            className="transition-opacity duration-200 hover:opacity-100"
+          >
+            Norte News
+          </Link>
           <a
             href={`mailto:${CONTACT_EMAIL}`}
             className="transition-opacity duration-200 hover:opacity-100"

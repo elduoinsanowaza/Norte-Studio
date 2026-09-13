@@ -5,6 +5,8 @@ import Accordion from "@/components/Accordion";
 import Highlight from "@/components/Highlight";
 import { ALL_OBJECTIONS, OBJECTIONS } from "@/lib/content";
 import { setupPinnedStaggerReveal } from "@/lib/scrollReveal";
+import { GLASS_BUTTON_LIGHT, GLASS_BUTTON_LIGHT_SM, GLASS_CARD_LIGHT } from "@/lib/glassButton";
+import GlassBlobs from "@/components/GlassBlobs";
 
 export default function Objections() {
   const [panelOpen, setPanelOpen] = useState(false);
@@ -48,12 +50,13 @@ export default function Objections() {
   return (
     <section
       ref={wrapperRef}
-      className="relative bg-ns-white text-ns-black md:h-[220vh]"
+      className="relative overflow-hidden bg-ns-white text-ns-black md:h-[220vh]"
     >
       <div
         ref={pinRef}
-        className="container-content flex flex-col gap-ns-7 py-ns-8 md:h-screen md:justify-center md:py-0"
+        className="container-content relative flex flex-col gap-ns-7 py-ns-8 md:h-screen md:justify-center md:py-0"
       >
+        <GlassBlobs />
         <h2 className="text-2xl font-medium tracking-[0.08em] uppercase opacity-60">
           Dudas frecuentes
         </h2>
@@ -66,7 +69,7 @@ export default function Objections() {
                 cardRefs.current[i] = el;
               }}
             >
-              <article className="flex flex-col gap-ns-2 border-t border-ns-black/20 pt-ns-4">
+              <article className={`flex flex-col gap-ns-2 radius-2xl p-ns-4 ${GLASS_CARD_LIGHT}`}>
                 <h3 className="text-body font-medium">{item.question}</h3>
                 <p className="text-micro leading-relaxed opacity-70">
                   <Highlight text={item.answer} words={item.highlightWords} />
@@ -80,7 +83,7 @@ export default function Objections() {
           <button
             type="button"
             onClick={() => setPanelOpen(true)}
-            className="inline-block border border-ns-black px-ns-4 py-ns-2 text-micro tracking-[0.08em] uppercase transition-colors duration-200 hover:bg-ns-black hover:text-ns-white"
+            className={`inline-block radius-full px-ns-4 py-ns-2 text-micro tracking-[0.08em] uppercase ${GLASS_BUTTON_LIGHT}`}
           >
             Ver todas las dudas
           </button>
@@ -94,13 +97,14 @@ export default function Objections() {
           aria-label="Todas las dudas"
           className="fixed inset-0 z-50 overflow-y-auto bg-ns-white text-ns-black"
         >
+          <GlassBlobs />
           <div className="container-content flex min-h-full flex-col py-ns-6">
             <div className="flex justify-end">
               <button
                 type="button"
                 onClick={() => setPanelOpen(false)}
                 aria-label="Cerrar"
-                className="border border-ns-black px-ns-2 py-ns-1 text-micro uppercase tracking-[0.08em] hover:bg-ns-black hover:text-ns-white"
+                className={`radius-full px-ns-2 py-ns-1 text-micro uppercase tracking-[0.08em] ${GLASS_BUTTON_LIGHT_SM}`}
               >
                 Cerrar ✕
               </button>

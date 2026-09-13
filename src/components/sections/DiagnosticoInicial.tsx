@@ -8,6 +8,8 @@ import {
   DIAGNOSTIC_TITLE,
 } from "@/lib/content";
 import { gsap } from "@/lib/gsap";
+import { GLASS_CARD_LIGHT } from "@/lib/glassButton";
+import GlassBlobs from "@/components/GlassBlobs";
 
 export default function DiagnosticoInicial() {
   const wrapperRef = useRef<HTMLElement>(null);
@@ -60,9 +62,15 @@ export default function DiagnosticoInicial() {
   }
 
   return (
-    <section ref={wrapperRef} className="bg-ns-white py-ns-9 text-ns-black">
+    <section
+      ref={wrapperRef}
+      className="relative bg-ns-white py-ns-9 text-ns-black"
+    >
       <div ref={blockRef} className="container-content">
-        <div className="flex max-w-[var(--text-width)] flex-col gap-ns-4">
+        <div
+          className={`relative overflow-hidden flex max-w-[var(--text-width)] flex-col gap-ns-4 radius-2xl p-ns-6 ${GLASS_CARD_LIGHT}`}
+        >
+          <GlassBlobs />
           <h2 className="text-2xl font-medium leading-snug sm:text-3xl">
             {DIAGNOSTIC_TITLE}
           </h2>

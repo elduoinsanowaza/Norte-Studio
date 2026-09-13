@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { GLASS_BUTTON_LIGHT, GLASS_BUTTON_LIGHT_SM, GLASS_CARD_LIGHT } from "@/lib/glassButton";
+import GlassBlobs from "@/components/GlassBlobs";
 
 export default function MazoRegistrationPopup({
   onSubmit,
@@ -35,12 +37,13 @@ export default function MazoRegistrationPopup({
         onClick={onClose}
         aria-hidden
       />
+      <GlassBlobs />
 
       <div
         role="dialog"
         aria-modal="true"
         aria-label="Regístrate para armar tu mazo"
-        className="relative flex w-full max-w-md flex-col gap-ns-5 border border-ns-black bg-ns-white p-ns-5 text-ns-black"
+        className={`relative flex w-full max-w-md flex-col gap-ns-5 radius-3xl p-ns-5 ${GLASS_CARD_LIGHT}`}
       >
         <div className="flex items-start justify-between gap-ns-3">
           <div className="flex flex-col gap-ns-2">
@@ -55,7 +58,7 @@ export default function MazoRegistrationPopup({
             type="button"
             onClick={onClose}
             aria-label="Cerrar"
-            className="shrink-0 border border-ns-black px-ns-2 py-ns-1 text-micro uppercase tracking-[0.08em] hover:bg-ns-black hover:text-ns-white"
+            className={`shrink-0 radius-full px-ns-2 py-ns-1 text-micro uppercase tracking-[0.08em] ${GLASS_BUTTON_LIGHT_SM}`}
           >
             ✕
           </button>
@@ -92,7 +95,7 @@ export default function MazoRegistrationPopup({
 
           <button
             type="submit"
-            className="self-start border border-ns-black px-ns-4 py-ns-2 text-micro tracking-[0.08em] uppercase transition-colors duration-200 hover:bg-ns-black hover:text-ns-white"
+            className={`self-start radius-2xl px-ns-4 py-ns-2 text-micro tracking-[0.08em] uppercase ${GLASS_BUTTON_LIGHT}`}
           >
             Ver carta
           </button>

@@ -44,6 +44,66 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
 export const SERVICES_NOTE =
   "Cada sistema se diseña a partir de la función que necesita cumplir dentro de la empresa.";
 
+export type ServiceDetail = {
+  /** What the service is, in one short sentence. */
+  description: string;
+  /** Who it's for, in one short sentence. */
+  audience: string;
+  /** What problem it solves, in one short sentence. */
+  solves: string;
+};
+
+/** Keyed by the exact item strings in SERVICE_GROUPS. */
+export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
+  Branding: {
+    description:
+      "Identidad visual y de marca completa: logo, paleta, tono y sistema de aplicación, construidos desde análisis.",
+    audience: "Marcas nuevas, o negocios cuya imagen ya no refleja lo que son.",
+    solves: "Inconsistencia visual y falta de reconocimiento de marca.",
+  },
+  "Sistemas de contenido": {
+    description:
+      "Calendarios, formatos y flujos de trabajo para producir contenido de forma constante.",
+    audience: "Negocios que publican de forma irregular o dependen de la inspiración del momento.",
+    solves: "Contenido inconsistente y la sensación de improvisar cada semana.",
+  },
+  "Páginas comerciales": {
+    description: "Sitios web diseñados para vender: landing pages, catálogos, pagos o áreas de cliente.",
+    audience: "Negocios cuya página no genera clientes, o que aún no tienen presencia web.",
+    solves: "Una página que existe pero no convierte.",
+  },
+  "Sistemas audiovisuales": {
+    description: "Producción de video y motion graphics para redes, campañas o presentaciones.",
+    audience: "Negocios que necesitan comunicar con video pero no tienen equipo ni proceso para producirlo.",
+    solves: "Falta de contenido audiovisual constante y de nivel.",
+  },
+  "Sistemas administrativos": {
+    description: "Paneles a medida para controlar ventas, ingresos, egresos y reportes.",
+    audience: "Negocios que llevan su administración en hojas de cálculo dispersas.",
+    solves: "Falta de visibilidad sobre el estado real del negocio.",
+  },
+  "Sistemas de inventario": {
+    description: "Control de existencias, entradas y salidas, con alertas en tiempo real.",
+    audience: "Negocios con producto físico que pierden control de su stock.",
+    solves: "Inventario desactualizado y pérdidas por descontrol.",
+  },
+  "Herramientas internas": {
+    description: "Aplicaciones a medida para un proceso específico que ninguna herramienta genérica resuelve.",
+    audience: "Negocios con un proceso particular que hoy resuelven a mano.",
+    solves: "Procesos manuales y propensos a error que ya deberían estar sistematizados.",
+  },
+  Automatizaciones: {
+    description: "Conexión de herramientas para que las tareas repetitivas ocurran solas.",
+    audience: "Negocios que repiten la misma tarea manual todos los días.",
+    solves: "Tiempo perdido y seguimientos que se caen por falta de proceso.",
+  },
+  "Integraciones con IA": {
+    description: "Implementación de IA en procesos concretos: atención, contenido, análisis de datos.",
+    audience: "Negocios que saben que la IA podría ayudarles pero no saben por dónde empezar.",
+    solves: "Oportunidades de eficiencia sin aprovechar por falta de dirección.",
+  },
+};
+
 export const BOTTLE_QUESTION = "¿Sabes dónde está el cuello de botella de tu empresa?";
 export const BOTTLE_QUESTION_HIGHLIGHT_WORDS = ["botella"];
 

@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import Rhizome from "@/components/Rhizome";
 import { setupPinnedStaggerReveal } from "@/lib/scrollReveal";
+import GlassBlobs from "@/components/GlassBlobs";
 
 export default function Tools() {
   const wrapperRef = useRef<HTMLElement>(null);
@@ -31,12 +32,13 @@ export default function Tools() {
   return (
     <section
       ref={wrapperRef}
-      className="relative bg-ns-black text-ns-white md:h-[200vh]"
+      className="relative overflow-hidden bg-ns-black text-ns-white md:h-[200vh]"
     >
       <div
         ref={pinRef}
-        className="container-content flex flex-col gap-ns-6 py-ns-8 md:h-screen md:justify-center md:py-0"
+        className="container-content relative flex flex-col gap-ns-6 py-ns-8 md:h-screen md:justify-center md:py-0"
       >
+        <GlassBlobs dark />
         <h2
           ref={headingRef}
           className="text-2xl font-medium tracking-[0.08em] uppercase opacity-60"
