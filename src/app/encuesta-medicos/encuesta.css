@@ -1,0 +1,594 @@
+/* Scoped design system for the "Médicos en Durango" survey microsite.
+   Intentionally its own palette/typography rhythm — separate from the
+   main Norte Studio site, which stays strict black/white/sharp-corner.
+   The global `* { border-radius: 0 !important; }` reset in globals.css
+   still applies here, so every rounded surface below goes through the
+   `.em-r-*` escape-hatch classes instead of Tailwind's `rounded-*`. */
+
+.em-root {
+  --em-bg: #f2fbf9;
+  --em-bg-deep: #e4f5f1;
+  --em-ink: #0b2436;
+  --em-ink-soft: #4c6270;
+  --em-teal: #0ea895;
+  --em-teal-dark: #087566;
+  --em-teal-pale: #d6f3ee;
+  --em-coral: #ff6b4a;
+  --em-coral-dark: #e34f30;
+  --em-card: #ffffff;
+  --em-border: rgba(11, 36, 54, 0.1);
+  --em-shadow-teal: 0 24px 60px -24px rgba(14, 168, 149, 0.45);
+  --em-shadow-soft: 0 12px 32px -16px rgba(11, 36, 54, 0.18);
+
+  /* Bone white with a black outline: the outline is what makes it readable
+     on the pale background, the fill stays out of the brand accents. */
+  --mascot-body: #f3ede1;
+  --mascot-shade: #d9d0bd; /* far-side limbs in profile */
+  --mascot-stroke: #151515;
+  --mascot-cross: #e23d3d;
+
+  background: var(--em-bg);
+  color: var(--em-ink);
+  min-height: 100dvh;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.em-r-lg {
+  border-radius: 18px !important;
+}
+.em-r-xl {
+  border-radius: 24px !important;
+}
+.em-r-pill {
+  border-radius: 999px !important;
+}
+
+/* ---------- decorative backdrop ---------- */
+
+.em-blob {
+  position: absolute;
+  border-radius: 999px !important;
+  filter: blur(60px);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+
+@keyframes em-float-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(3%, 4%) scale(1.06); }
+}
+@keyframes em-float-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-4%, -3%) scale(1.08); }
+}
+
+.em-blob-1 {
+  animation: em-float-a 14s ease-in-out infinite;
+}
+.em-blob-2 {
+  animation: em-float-b 17s ease-in-out infinite;
+}
+
+.em-pulse-path {
+  stroke-dasharray: 340;
+  stroke-dashoffset: 340;
+  animation: em-draw 3.2s ease-in-out infinite;
+}
+
+@keyframes em-draw {
+  0% { stroke-dashoffset: 340; opacity: 0; }
+  8% { opacity: 1; }
+  55% { stroke-dashoffset: 0; opacity: 1; }
+  75% { stroke-dashoffset: 0; opacity: 0.35; }
+  100% { stroke-dashoffset: -340; opacity: 0; }
+}
+
+/* ---------- entrances ---------- */
+
+@keyframes em-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.em-rise {
+  animation: em-rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes em-pop {
+  0% { opacity: 0; transform: scale(0.85); }
+  60% { opacity: 1; transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.em-pop {
+  animation: em-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.em-step-enter {
+  animation: em-rise 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ---------- controls ---------- */
+
+.em-option {
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+.em-option:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--em-shadow-soft);
+}
+.em-option:active {
+  transform: translateY(0);
+}
+
+.em-btn-primary {
+  background: var(--em-teal);
+  color: #ffffff;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: var(--em-shadow-teal);
+}
+.em-btn-primary:hover {
+  background: var(--em-teal-dark);
+  transform: translateY(-1px);
+}
+.em-btn-primary:disabled {
+  opacity: 0.4;
+  box-shadow: none;
+  transform: none;
+  cursor: not-allowed;
+}
+
+.em-btn-whatsapp {
+  background: #25d366;
+  color: #ffffff;
+  transition: background 0.2s ease, transform 0.15s ease;
+  box-shadow: 0 20px 50px -20px rgba(37, 211, 102, 0.6);
+}
+.em-btn-whatsapp:hover {
+  background: #1eb958;
+  transform: translateY(-1px);
+}
+
+.em-progress-track {
+  background: var(--em-teal-pale);
+  overflow: hidden;
+}
+.em-progress-fill {
+  background: linear-gradient(90deg, var(--em-teal), var(--em-coral));
+  transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.em-check-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: em-draw-once 0.6s 0.1s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+.em-check-mark {
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: em-draw-once 0.35s 0.55s ease-out forwards;
+}
+@keyframes em-draw-once {
+  to { stroke-dashoffset: 0; }
+}
+
+.em-rank-badge {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease;
+}
+
+/* ---------- mascot ---------- */
+
+/* Two layers of motion:
+   - `.mascot-figure` (the wrapper) does whole-body moves: tumble, spin,
+     squash on landing, getting back upright.
+   - The SVG joints do the body language: each part rotates around its own
+     pivot, and children (forearm, shin, head) ride along with the parent.
+   Keyframes are written for the LEFT side; `--s` flips the sign for the
+   right side, so "outward" is positive on both. */
+
+.mascot-figure {
+  transform-origin: 50% 60%;
+  will-change: transform;
+  filter: drop-shadow(0 3px 3px rgba(11, 36, 54, 0.2));
+}
+
+.mascot-figure svg g {
+  transform-box: view-box;
+}
+
+/* Pivots, in the 40×60 viewBox. */
+.m-body { transform-origin: 20px 57px; }
+.m-torso { transform-origin: 20px 36px; }
+.m-head { transform-origin: 20px 17px; }
+.m-arm-l { transform-origin: 12.2px 20.5px; --s: 1; }
+.m-arm-r { transform-origin: 27.8px 20.5px; --s: -1; }
+.m-fore-l { transform-origin: 12.2px 28.6px; --s: 1; }
+.m-fore-r { transform-origin: 27.8px 28.6px; --s: -1; }
+.m-leg-l { transform-origin: 16.9px 35.5px; --s: 1; }
+.m-leg-r { transform-origin: 23.1px 35.5px; --s: -1; }
+.m-shin-l { transform-origin: 16.9px 44.8px; --s: 1; }
+.m-shin-r { transform-origin: 23.1px 44.8px; --s: -1; }
+
+/* Seen from behind (climbing, walking back up): no face, no badge. */
+.m-backside { opacity: 0; }
+.m-back .m-front { opacity: 0; }
+.m-back .m-backside { opacity: 1; }
+
+/* ---- stand: breathing, looking around at the card ---- */
+
+@keyframes m-stand-torso {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.025); }
+}
+@keyframes m-stand-head {
+  0%, 16%, 100% { transform: rotate(0deg); }
+  28%, 44% { transform: rotate(-9deg); }
+  58%, 76% { transform: rotate(7deg); }
+}
+@keyframes m-stand-eyes {
+  0%, 16%, 100% { transform: translateX(0); }
+  28%, 44% { transform: translateX(-0.9px); }
+  58%, 76% { transform: translateX(0.9px); }
+}
+@keyframes m-stand-arm {
+  0%, 100% { transform: rotate(calc(var(--s) * 1deg)); }
+  50% { transform: rotate(calc(var(--s) * 3.5deg)); }
+}
+.mascot-stand .m-torso { animation: m-stand-torso 2.6s ease-in-out infinite; }
+.mascot-stand .m-head { animation: m-stand-head 2.6s ease-in-out infinite; }
+.mascot-stand .m-eyes { animation: m-stand-eyes 2.6s ease-in-out infinite; }
+.mascot-stand .m-arm { animation: m-stand-arm 2.6s ease-in-out infinite; }
+
+/* ---- walk: one full stride (both steps) per cycle ----
+   Front view, so a step reads as the knee coming toward you: thigh lifts
+   and foreshortens, shin folds up. Opposite arm swings forward (inward,
+   foreshortened, elbow bent); same-side arm swings back (outward). Body is
+   highest when a leg passes under it, hips sway, head counter-sways. */
+
+@keyframes m-walk-body {
+  0%, 50%, 100% { transform: translateY(0); }
+  25%, 75% { transform: translateY(-1.6px); }
+}
+@keyframes m-walk-torso {
+  0%, 100% { transform: rotate(2.5deg); }
+  50% { transform: rotate(-2.5deg); }
+}
+@keyframes m-walk-head {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+@keyframes m-walk-leg {
+  0%, 50%, 100% { transform: translateY(0) rotate(0deg) scaleY(1); }
+  25% { transform: translateY(-2.4px) rotate(calc(var(--s) * -3deg)) scaleY(0.9); }
+}
+@keyframes m-walk-shin {
+  0%, 50%, 100% { transform: scaleY(1); }
+  25% { transform: scaleY(0.72); }
+}
+@keyframes m-walk-arm {
+  0%, 50%, 100% { transform: rotate(calc(var(--s) * -1deg)) scaleY(1); }
+  25% { transform: rotate(calc(var(--s) * 9deg)) scaleY(0.97); }
+  75% { transform: rotate(calc(var(--s) * -10deg)) scaleY(0.88); }
+}
+@keyframes m-walk-fore {
+  0%, 50%, 100% { transform: rotate(calc(var(--s) * -3deg)); }
+  25% { transform: rotate(calc(var(--s) * -4deg)); }
+  75% { transform: rotate(calc(var(--s) * -28deg)); }
+}
+.mascot-walk .m-body { animation: m-walk-body 0.64s ease-in-out infinite; }
+.mascot-walk .m-torso { animation: m-walk-torso 0.64s ease-in-out infinite; }
+.mascot-walk .m-head { animation: m-walk-head 0.64s ease-in-out infinite; }
+.mascot-walk .m-leg { animation: m-walk-leg 0.64s ease-in-out infinite; }
+.mascot-walk .m-shin { animation: m-walk-shin 0.64s ease-in-out infinite; }
+.mascot-walk .m-arm { animation: m-walk-arm 0.64s ease-in-out infinite; }
+.mascot-walk .m-fore { animation: m-walk-fore 0.64s ease-in-out infinite; }
+.mascot-walk .m-leg-r,
+.mascot-walk .m-shin-r,
+.mascot-walk .m-arm-r,
+.mascot-walk .m-fore-r {
+  animation-delay: -0.32s;
+}
+
+/* ---- walk in profile (facing right; `.m-flip` mirrors it to go left) ----
+   Near leg plants in front (heel strike), sweeps back under the body, then
+   swings forward with the knee folding; far leg is half a cycle behind.
+   Arms counter-swing, elbows bending on the forward swing. Rotating a
+   hanging limb clockwise sends it backward, so forward = negative. */
+
+.m-flip { transform: scaleX(-1); }
+
+.s-body { transform-origin: 20px 57px; }
+.s-head { transform-origin: 20px 17px; }
+.s-arm-n, .s-arm-f { transform-origin: 20px 20.5px; }
+.s-fore-n, .s-fore-f { transform-origin: 20px 28.6px; }
+.s-leg-n, .s-leg-f { transform-origin: 20px 35.5px; }
+.s-shin-n, .s-shin-f { transform-origin: 20px 44.8px; }
+
+@keyframes s-walk-body {
+  0%, 50%, 100% { transform: translateY(0); }
+  25%, 75% { transform: translateY(-1.8px); }
+}
+@keyframes s-walk-head {
+  0%, 50%, 100% { transform: rotate(0deg); }
+  25%, 75% { transform: rotate(-2deg); }
+}
+@keyframes s-walk-leg {
+  0%, 100% { transform: rotate(-24deg); }
+  50% { transform: rotate(22deg); }
+}
+@keyframes s-walk-shin {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(8deg); }
+  72% { transform: rotate(42deg); }
+  88% { transform: rotate(12deg); }
+}
+@keyframes s-walk-arm {
+  0%, 100% { transform: rotate(20deg); }
+  50% { transform: rotate(-22deg); }
+}
+@keyframes s-walk-fore {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(-32deg); }
+}
+.mascot-walk .s-body { animation: s-walk-body 0.64s ease-in-out infinite; }
+.mascot-walk .s-head { animation: s-walk-head 0.64s ease-in-out infinite; }
+.mascot-walk .s-leg { animation: s-walk-leg 0.64s ease-in-out infinite; }
+.mascot-walk .s-shin { animation: s-walk-shin 0.64s ease-in-out infinite; }
+.mascot-walk .s-arm { animation: s-walk-arm 0.64s ease-in-out infinite; }
+.mascot-walk .s-fore { animation: s-walk-fore 0.64s ease-in-out infinite; }
+.mascot-walk .s-leg-f,
+.mascot-walk .s-shin-f,
+.mascot-walk .s-arm-f,
+.mascot-walk .s-fore-f {
+  animation-delay: -0.32s;
+}
+
+/* ---- tremor: arms shoot out, knees buckle, head rattles ---- */
+
+@keyframes em-mascot-tremor {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  15% { transform: translateX(-4px) rotate(-8deg); }
+  35% { transform: translateX(4px) rotate(7deg); }
+  55% { transform: translateX(-3px) rotate(-9deg); }
+  75% { transform: translateX(3px) rotate(5deg); }
+}
+@keyframes m-tremor-arm {
+  0% { transform: rotate(0deg); }
+  30% { transform: rotate(calc(var(--s) * 40deg)); }
+  60% { transform: rotate(calc(var(--s) * 26deg)); }
+  100% { transform: rotate(calc(var(--s) * 48deg)); }
+}
+@keyframes m-tremor-fore {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(calc(var(--s) * -35deg)); }
+}
+@keyframes m-tremor-leg {
+  0% { transform: rotate(0deg); }
+  40% { transform: rotate(calc(var(--s) * 8deg)); }
+  70% { transform: rotate(calc(var(--s) * -4deg)); }
+  100% { transform: rotate(calc(var(--s) * 10deg)); }
+}
+@keyframes m-tremor-shin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(calc(var(--s) * -14deg)); }
+}
+@keyframes m-tremor-head {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-11deg); }
+  50% { transform: rotate(9deg); }
+  75% { transform: rotate(-7deg); }
+  100% { transform: rotate(5deg); }
+}
+.mascot-tremor { animation: em-mascot-tremor 0.25s linear; }
+.mascot-tremor .m-arm { animation: m-tremor-arm 0.25s ease-out forwards; }
+.mascot-tremor .m-fore { animation: m-tremor-fore 0.25s ease-out forwards; }
+.mascot-tremor .m-leg { animation: m-tremor-leg 0.25s ease-out forwards; }
+.mascot-tremor .m-shin { animation: m-tremor-shin 0.25s ease-out forwards; }
+.mascot-tremor .m-head { animation: m-tremor-head 0.25s linear forwards; }
+
+/* ---- fall: deliberately cartoonish spin, arms windmilling overhead,
+   legs kicking out of sync ---- */
+
+@keyframes em-mascot-fall {
+  0% { transform: rotate(0deg) scale(1); }
+  40% { transform: rotate(-200deg) scale(0.95, 1.08); }
+  100% { transform: rotate(-470deg) scale(1.05, 0.95); }
+}
+@keyframes m-fall-arm {
+  0% { transform: rotate(calc(var(--s) * 48deg)); }
+  35% { transform: rotate(calc(var(--s) * 150deg)); }
+  65% { transform: rotate(calc(var(--s) * 112deg)); }
+  100% { transform: rotate(calc(var(--s) * 168deg)); }
+}
+@keyframes m-fall-fore {
+  0% { transform: rotate(calc(var(--s) * -35deg)); }
+  40% { transform: rotate(calc(var(--s) * 22deg)); }
+  70% { transform: rotate(calc(var(--s) * -42deg)); }
+  100% { transform: rotate(calc(var(--s) * 10deg)); }
+}
+@keyframes m-fall-leg-l {
+  0% { transform: rotate(10deg); }
+  50% { transform: rotate(36deg); }
+  100% { transform: rotate(16deg); }
+}
+@keyframes m-fall-leg-r {
+  0% { transform: rotate(-10deg); }
+  45% { transform: rotate(-4deg); }
+  100% { transform: rotate(-38deg); }
+}
+@keyframes m-fall-shin {
+  0% { transform: rotate(calc(var(--s) * -14deg)); }
+  50% { transform: rotate(calc(var(--s) * -44deg)); }
+  100% { transform: rotate(calc(var(--s) * -12deg)); }
+}
+@keyframes m-fall-head {
+  0% { transform: rotate(5deg); }
+  50% { transform: rotate(-16deg); }
+  100% { transform: rotate(10deg); }
+}
+.mascot-fall { animation: em-mascot-fall 0.42s cubic-bezier(0.55, 0, 1, 0.45) forwards; }
+.mascot-fall .m-arm { animation: m-fall-arm 0.42s ease-in-out forwards; }
+.mascot-fall .m-fore { animation: m-fall-fore 0.42s ease-in-out forwards; }
+.mascot-fall .m-leg-l { animation: m-fall-leg-l 0.42s ease-in-out forwards; }
+.mascot-fall .m-leg-r { animation: m-fall-leg-r 0.42s ease-in-out forwards; }
+.mascot-fall .m-shin { animation: m-fall-shin 0.42s ease-in-out forwards; }
+.mascot-fall .m-head { animation: m-fall-head 0.42s ease-in-out forwards; }
+
+/* ---- bounce: lands on its side, bounces twice, limbs flop and settle
+   sprawled ---- */
+
+@keyframes em-mascot-bounce {
+  0% { transform: translate(0, 0) rotate(-470deg) scale(1.25, 0.7); }
+  25% { transform: translate(-6px, -16px) rotate(-440deg) scale(0.92, 1.08); }
+  48% { transform: translate(-2px, 0) rotate(-455deg) scale(1.15, 0.82); }
+  68% { transform: translate(5px, -7px) rotate(-445deg) scale(0.97, 1.03); }
+  86% { transform: translate(3px, 0) rotate(-450deg) scale(1.08, 0.9); }
+  100% { transform: translate(2px, 0) rotate(-450deg) scale(1, 1); }
+}
+@keyframes m-bounce-arm {
+  0% { transform: rotate(calc(var(--s) * 168deg)); }
+  25% { transform: rotate(calc(var(--s) * 118deg)); }
+  50% { transform: rotate(calc(var(--s) * 150deg)); }
+  75% { transform: rotate(calc(var(--s) * 94deg)); }
+  100% { transform: rotate(calc(var(--s) * 108deg)); }
+}
+@keyframes m-bounce-fore {
+  0% { transform: rotate(calc(var(--s) * 10deg)); }
+  30% { transform: rotate(calc(var(--s) * -38deg)); }
+  60% { transform: rotate(calc(var(--s) * 16deg)); }
+  100% { transform: rotate(calc(var(--s) * -12deg)); }
+}
+@keyframes m-bounce-leg-l {
+  0% { transform: rotate(16deg); }
+  30% { transform: rotate(40deg); }
+  60% { transform: rotate(14deg); }
+  100% { transform: rotate(26deg); }
+}
+@keyframes m-bounce-leg-r {
+  0% { transform: rotate(-38deg); }
+  30% { transform: rotate(-12deg); }
+  60% { transform: rotate(-34deg); }
+  100% { transform: rotate(-20deg); }
+}
+@keyframes m-bounce-shin {
+  0% { transform: rotate(calc(var(--s) * -12deg)); }
+  35% { transform: rotate(0deg); }
+  70% { transform: rotate(calc(var(--s) * -26deg)); }
+  100% { transform: rotate(calc(var(--s) * -10deg)); }
+}
+@keyframes m-bounce-head {
+  0% { transform: rotate(10deg); }
+  30% { transform: rotate(-14deg); }
+  60% { transform: rotate(8deg); }
+  100% { transform: rotate(-6deg); }
+}
+.mascot-bounce { animation: em-mascot-bounce 0.38s ease-out forwards; }
+.mascot-bounce .m-arm { animation: m-bounce-arm 0.38s ease-out forwards; }
+.mascot-bounce .m-fore { animation: m-bounce-fore 0.38s ease-out forwards; }
+.mascot-bounce .m-leg-l { animation: m-bounce-leg-l 0.38s ease-out forwards; }
+.mascot-bounce .m-leg-r { animation: m-bounce-leg-r 0.38s ease-out forwards; }
+.mascot-bounce .m-shin { animation: m-bounce-shin 0.38s ease-out forwards; }
+.mascot-bounce .m-head { animation: m-bounce-head 0.38s ease-out forwards; }
+
+/* ---- climb (seen from behind): rolls upright, then hand-over-hand —
+   one arm reaches while the opposite knee steps up, the other arm pulls
+   down with the elbow bent ---- */
+
+@keyframes em-mascot-climb {
+  0% { transform: translate(2px, 0) rotate(-450deg); }
+  18% { transform: translate(0, 0) rotate(-360deg); }
+  36% { transform: translate(-1px, 0) rotate(-363deg); }
+  52% { transform: translate(1px, 0) rotate(-356deg); }
+  72% { transform: translate(-1px, 0) rotate(-362deg); }
+  100% { transform: translate(0, 0) rotate(-360deg); }
+}
+@keyframes m-climb-arm {
+  0%, 100% { transform: rotate(calc(var(--s) * 168deg)); }
+  50% { transform: rotate(calc(var(--s) * 118deg)); }
+}
+@keyframes m-climb-fore {
+  0%, 100% { transform: rotate(calc(var(--s) * -8deg)); }
+  50% { transform: rotate(calc(var(--s) * -58deg)); }
+}
+@keyframes m-climb-leg {
+  0%, 100% { transform: translateY(0) rotate(0deg) scaleY(1); }
+  50% { transform: translateY(-3.2px) rotate(calc(var(--s) * 7deg)) scaleY(0.88); }
+}
+@keyframes m-climb-shin {
+  0%, 100% { transform: scaleY(1) rotate(0deg); }
+  50% { transform: scaleY(0.7) rotate(calc(var(--s) * -10deg)); }
+}
+@keyframes m-climb-torso {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+@keyframes m-climb-body {
+  0%, 50%, 100% { transform: translateY(0); }
+  25%, 75% { transform: translateY(-1.2px); }
+}
+/* Keep the 1.28s in sync with T_CLIMB_1 + T_SLIP + T_CLIMB_2. */
+.mascot-climb { animation: em-mascot-climb 1.28s ease-out forwards; }
+.mascot-climb .m-body { animation: m-climb-body 0.44s ease-in-out infinite; }
+.mascot-climb .m-torso { animation: m-climb-torso 0.44s ease-in-out infinite; }
+.mascot-climb .m-arm { animation: m-climb-arm 0.44s ease-in-out infinite; }
+.mascot-climb .m-fore { animation: m-climb-fore 0.44s ease-in-out infinite; }
+.mascot-climb .m-leg { animation: m-climb-leg 0.44s ease-in-out infinite; }
+.mascot-climb .m-shin { animation: m-climb-shin 0.44s ease-in-out infinite; }
+.mascot-climb .m-arm-r,
+.mascot-climb .m-fore-r,
+.mascot-climb .m-leg-l,
+.mascot-climb .m-shin-l {
+  animation-delay: -0.22s;
+}
+
+/* ---- drag (held up) and fly (thrown): arms up and flailing, legs
+   kicking out of step. Whole-body swing/tumble is the physics wrapper's
+   job, so these phases have no figure-level animation. ---- */
+
+@keyframes m-drag-arm {
+  0%, 100% { transform: rotate(calc(var(--s) * 150deg)); }
+  50% { transform: rotate(calc(var(--s) * 118deg)); }
+}
+@keyframes m-drag-fore {
+  0%, 100% { transform: rotate(calc(var(--s) * -22deg)); }
+  50% { transform: rotate(calc(var(--s) * 18deg)); }
+}
+@keyframes m-drag-leg {
+  0%, 100% { transform: rotate(calc(var(--s) * -6deg)); }
+  50% { transform: rotate(calc(var(--s) * 18deg)); }
+}
+@keyframes m-drag-shin {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(calc(var(--s) * -32deg)); }
+}
+@keyframes m-drag-head {
+  0%, 100% { transform: rotate(-7deg); }
+  50% { transform: rotate(7deg); }
+}
+.mascot-drag .m-arm { animation: m-drag-arm 0.5s ease-in-out infinite; }
+.mascot-drag .m-fore { animation: m-drag-fore 0.5s ease-in-out infinite; }
+.mascot-drag .m-leg { animation: m-drag-leg 0.42s ease-in-out infinite; }
+.mascot-drag .m-shin { animation: m-drag-shin 0.42s ease-in-out infinite; }
+.mascot-drag .m-head { animation: m-drag-head 0.5s ease-in-out infinite; }
+.mascot-fly .m-arm { animation: m-drag-arm 0.26s ease-in-out infinite; }
+.mascot-fly .m-fore { animation: m-drag-fore 0.26s ease-in-out infinite; }
+.mascot-fly .m-leg { animation: m-drag-leg 0.22s ease-in-out infinite; }
+.mascot-fly .m-shin { animation: m-drag-shin 0.22s ease-in-out infinite; }
+.mascot-fly .m-head { animation: m-drag-head 0.26s ease-in-out infinite; }
+.mascot-drag .m-arm-r, .mascot-drag .m-fore-r,
+.mascot-fly .m-arm-r, .mascot-fly .m-fore-r { animation-delay: -0.13s; }
+.mascot-drag .m-leg-r, .mascot-drag .m-shin-r,
+.mascot-fly .m-leg-r, .mascot-fly .m-shin-r { animation-delay: -0.11s; }
+
+/* Reduce motion for anyone who asked for it. */
+@media (prefers-reduced-motion: reduce) {
+  .em-blob-1, .em-blob-2, .em-pulse-path, .em-rise, .em-pop, .em-step-enter,
+  .mascot-figure, .mascot-figure * {
+    animation: none !important;
+  }
+}
