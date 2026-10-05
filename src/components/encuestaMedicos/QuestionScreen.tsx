@@ -99,14 +99,6 @@ export default function QuestionScreen({
           />
         )}
 
-        {question.type === "number" && (
-          <NumberField
-            question={question}
-            value={answers[question.id] as number | null | undefined}
-            onChange={(v) => setAnswer(question.id, v)}
-          />
-        )}
-
         {question.type === "ranking" && (
           <RankingField
             question={question}
@@ -172,25 +164,6 @@ function NextControls({
       >
         Continuar →
       </button>
-    );
-  }
-
-  if (question.type === "number") {
-    return (
-      <div className="mt-8 flex items-center gap-5">
-        <button type="button" onClick={onNext} className="em-btn-primary em-r-pill px-8 py-3.5 text-sm font-semibold">
-          Continuar →
-        </button>
-        {question.skippable ? (
-          <button
-            type="button"
-            onClick={onNext}
-            className="text-sm font-medium text-[var(--em-ink-soft)] underline decoration-dotted underline-offset-4 hover:text-[var(--em-ink)]"
-          >
-            Prefiero no responder
-          </button>
-        ) : null}
-      </div>
     );
   }
 
@@ -369,39 +342,6 @@ function ScaleField({
         <span>{question.minLabel}</span>
         <span>{question.maxLabel}</span>
       </div>
-    </div>
-  );
-}
-
-function NumberField({
-  question,
-  value,
-  onChange,
-}: {
-  question: Extract<Question, { type: "number" }>;
-  value: number | null | undefined;
-  onChange: (v: number | null) => void;
-}) {
-  return (
-    <div className="em-r-xl flex items-center gap-2 border border-[var(--em-border)] bg-[var(--em-card)] px-6 py-5">
-      <span className="text-2xl font-semibold text-[var(--em-teal-dark)]">$</span>
-      <input
-        autoFocus
-        type="text"
-        inputMode="decimal"
-        value={value ?? ""}
-        onChange={(e) => {
-          const raw = e.target.value.replace(/[^\d]/g, "");
-          onChange(raw === "" ? null : Number(raw));
-        }}
-        placeholder="0"
-        className="w-full bg-transparent text-3xl font-semibold text-[var(--em-ink)] outline-none"
-      />
-      {question.unit ? (
-        <span className="whitespace-nowrap text-sm font-medium text-[var(--em-ink-soft)]">
-          {question.unit}
-        </span>
-      ) : null}
     </div>
   );
 }

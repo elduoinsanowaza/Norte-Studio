@@ -51,8 +51,7 @@ export default function ClosingScreen({
       </h2>
 
       <p className="mt-4 max-w-md text-base leading-relaxed text-[var(--em-ink-soft)]">
-        Con esto nos ayudas a construir un espacio pensado para médicos que,
-        como tú, están armando su consulta privada en Durango.
+        Tu experiencia nos ayuda muchísimo. Gracias por tu tiempo.
       </p>
 
       <div className="em-r-xl mt-7 border border-[var(--em-border)] bg-white px-6 py-5">

@@ -39,12 +39,6 @@ export type ScaleQuestion = BaseQuestion & {
   maxLabel: string;
 };
 
-export type NumberQuestion = BaseQuestion & {
-  type: "number";
-  unit?: string;
-  skippable?: boolean;
-};
-
 export type RankingQuestion = BaseQuestion & {
   type: "ranking";
   items: QuestionOption[];
@@ -60,7 +54,6 @@ export type Question =
   | SingleQuestion
   | MultiQuestion
   | ScaleQuestion
-  | NumberQuestion
   | RankingQuestion
   | ExtrasQuestion;
 
@@ -103,6 +96,7 @@ export const QUESTIONS: Question[] = [
     type: "single",
     prompt: "¿Cuál es tu especialidad?",
     options: [
+      { value: "medico_general", label: "Médico General" },
       { value: "pediatria", label: "Pediatría" },
       { value: "gineco", label: "Ginecología y Obstetricia" },
       { value: "medicina_interna", label: "Medicina Interna" },
@@ -197,18 +191,28 @@ export const QUESTIONS: Question[] = [
   {
     id: "q17",
     section: 3,
-    type: "number",
-    unit: "/ hora",
-    skippable: true,
+    type: "single",
     prompt: "¿A partir de qué precio por hora dudarías de la calidad, por ser demasiado bajo?",
+    options: [
+      { value: "50_o_menos", label: "$50 o menos" },
+      { value: "51_100", label: "$51–$100" },
+      { value: "101_150", label: "$101–$150" },
+      { value: "151_199", label: "$151–$199" },
+      { value: "200_o_mas", label: "$200 o más" },
+    ],
   },
   {
     id: "q20",
     section: 3,
-    type: "number",
-    unit: "/ hora",
-    skippable: true,
+    type: "single",
     prompt: "¿A partir de qué precio por hora ya no lo pagarías, por caro?",
+    options: [
+      { value: "200_o_menos", label: "$200 o menos" },
+      { value: "201_300", label: "$201–$300" },
+      { value: "301_400", label: "$301–$400" },
+      { value: "401_499", label: "$401–$499" },
+      { value: "500_o_mas", label: "$500 o más" },
+    ],
   },
   {
     id: "q21",
