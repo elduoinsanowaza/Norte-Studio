@@ -20,7 +20,7 @@ export default function IntroScreen({ onStart }: { onStart: () => void }) {
       </div>
 
       <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-[var(--em-teal-dark)]">
-        Encuesta · Médicos en Durango
+        Encuesta · Profesionales de la salud en Durango
       </p>
 
       <h1 className="max-w-2xl text-[2.1rem] font-bold leading-[1.08] text-[var(--em-ink)] sm:text-5xl">
@@ -28,7 +28,7 @@ export default function IntroScreen({ onStart }: { onStart: () => void }) {
       </h1>
 
       <p className="mt-5 max-w-xl text-base leading-relaxed text-[var(--em-ink-soft)] sm:text-lg">
-        Cuéntanos tu experiencia como médico. No hay respuestas correctas
+        Cuéntanos tu experiencia atendiendo pacientes. No hay respuestas correctas
         ni incorrectas: solo lo que vives día a día.
       </p>
 

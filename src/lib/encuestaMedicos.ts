@@ -1,7 +1,7 @@
-// Content + data model for the "Médicos en Durango" survey microsite.
-// Question text and options are transcribed verbatim from
-// "Contenido de Diagnostico Inicial" (encuesta_medicos_durango.pdf) —
-// only the surrounding intro/closing copy was written fresh for the web.
+// Content + data model for the health-professionals survey microsite
+// (médicos, fisioterapeutas, nutriólogos in Durango). Questions started
+// verbatim from encuesta_medicos_durango.pdf and were since trimmed and
+// generalized beyond médicos; ids keep the PDF numbering.
 
 export type QuestionOption = {
   value: string;
@@ -59,6 +59,17 @@ export type Question =
 
 export const QUESTIONS: Question[] = [
   {
+    id: "profesion",
+    section: 1,
+    type: "single",
+    prompt: "¿Cuál es tu profesión?",
+    options: [
+      { value: "medico", label: "Médico/a" },
+      { value: "fisioterapeuta", label: "Fisioterapeuta" },
+      { value: "nutriologo", label: "Nutriólogo/a" },
+    ],
+  },
+  {
     id: "q1",
     section: 1,
     type: "single",
@@ -76,16 +87,18 @@ export const QUESTIONS: Question[] = [
     section: 1,
     type: "single",
     prompt: "¿Cuál es tu situación actual?",
+    // Values kept from the médicos-only version so earlier answers still
+    // line up; each label now covers all three professions.
     options: [
-      { value: "residente", label: "Residente de último año" },
-      { value: "especialista_nuevo", label: "Especialista con menos de 2 años de egresado" },
+      { value: "residente", label: "Residente, pasante o en servicio social" },
+      { value: "especialista_nuevo", label: "Con menos de 2 años de egresado" },
       {
         value: "publico_interes_privado",
-        label: "Médico en sector público, con interés en atender también en privado",
+        label: "En sector público o en una institución, con interés en atender también en privado",
       },
       {
         value: "privada_establecida",
-        label: "Médico con práctica privada establecida (más de 2 años)",
+        label: "Con práctica privada establecida (más de 2 años)",
       },
       { value: "otra", label: "Otra", other: true },
     ],
@@ -95,6 +108,8 @@ export const QUESTIONS: Question[] = [
     section: 1,
     type: "single",
     prompt: "¿Cuál es tu especialidad?",
+    // The options are all medical specialties.
+    condition: (a) => a.profesion === "medico",
     options: [
       { value: "medico_general", label: "Médico General" },
       { value: "pediatria", label: "Pediatría" },
@@ -172,7 +187,7 @@ export const QUESTIONS: Question[] = [
     minLabel: "Nada interesado/a",
     maxLabel: "Muy interesado/a",
     contextBox:
-      "Se evalúa en Durango un espacio con varios consultorios listos para consultar: mobiliario médico, recepción, sala de espera, limpieza, manejo de RPBI e internet. Se usaría por horas mediante paquetes mensuales, sin contrato anual. Cada médico llevaría su propio instrumental.",
+      "Se evalúa en Durango un espacio con varios consultorios listos para consultar: mobiliario para consulta, recepción, sala de espera, limpieza, manejo de RPBI e internet. Se usaría por horas mediante paquetes mensuales, sin contrato anual. Cada profesional llevaría su propio instrumental.",
   },
   {
     id: "q14",
@@ -307,6 +322,6 @@ export const WHATSAPP_NUMBER = "526181568166";
 export const WHATSAPP_DISPLAY = "618 156 8166";
 
 export function buildWhatsappLink(folio: string) {
-  const text = `Hola, terminé la encuesta de médicos en Durango y quiero validar mi 5% de descuento. Mi folio es ${folio}, ahí les paso la captura 🩺`;
+  const text = `Hola, terminé la encuesta de profesionales de la salud en Durango y quiero validar mi 5% de descuento. Mi folio es ${folio}, ahí les paso la captura 🩺`;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 }

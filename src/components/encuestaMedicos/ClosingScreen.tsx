@@ -86,6 +86,11 @@ export default function ClosingScreen({
         <WhatsappIcon className="h-5 w-5" />
         Enviar captura por WhatsApp
       </a>
+
+      <p className="mt-6 max-w-sm text-sm leading-relaxed text-[var(--em-ink-soft)]">
+        🎁 <span className="font-semibold text-[var(--em-ink)]">¿La compartiste con más colegas?</span>{" "}
+        Manda la prueba a este mismo número y aumentan tus beneficios especiales.
+      </p>
     </div>
   );
 }

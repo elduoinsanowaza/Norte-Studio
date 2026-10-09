@@ -91,7 +91,7 @@ export default function EncuestaWizard() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          answers: snapshot,
+          answers: onlyAnsweredOnPath(snapshot),
           contactName: snapshot.q26_name,
           contactInfo: snapshot.q26_info,
           comments: snapshot.q27,
@@ -142,6 +142,19 @@ export default function EncuestaWizard() {
         )}
       </div>
     </div>
+  );
+}
+
+// Going back and changing an answer can hide a question that was already
+// answered (e.g. profesión → no longer médico hides especialidad). Drop
+// those so a fisioterapeuta never gets saved with a medical specialty.
+function onlyAnsweredOnPath(answers: Record<string, unknown>) {
+  const shown = new Set(getVisibleQuestions(answers).map((q) => q.id));
+  const extras = new Set(["q26_name", "q26_info", "q27"]);
+  return Object.fromEntries(
+    Object.entries(answers).filter(
+      ([key]) => extras.has(key) || shown.has(key.replace(/_other$/, ""))
+    )
   );
 }
 
